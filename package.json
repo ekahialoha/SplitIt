@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/ekahialoha/SplitIt/issues"
   },
-  "homepage": "https://github.com/ekahialoha/SplitIt#readme"
+  "homepage": "https://github.com/ekahialoha/SplitIt#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "dotenv": "^8.0.0",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "mongoose": "^5.5.9"
+  }
 }
