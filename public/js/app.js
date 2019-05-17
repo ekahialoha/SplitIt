@@ -53,7 +53,7 @@ app.controller('SplitItController', ['$http', function($http) {
             method: 'POST',
             url: '/house',
             data: {
-                name: this.name
+                name: this.houseName
             }
         }). then((response)=>{
             console.log(response);

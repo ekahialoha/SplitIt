@@ -24,12 +24,16 @@ houses.post('/', checkAuth, (req, res) => {
 	House.create({
 		name: req.body.name,
 		owner: req.session.user._id
-	},  (err, createdHouse) => {
-		res.json(createdHouse);
+	}, (err, createdHouse) => {
+		if(err) {
+			res.status(500).json(err);
+		} else {
+			res.json(createdHouse);
+		}
 	});
 });
 
-//EDIT 
+//EDIT
 houses.put('/:id', (req, res)=> {
 	House.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedHouse) => {
 		res.json(updatedHouse);
