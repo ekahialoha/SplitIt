@@ -36,4 +36,15 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         });
     };
+
+    this.logOut = () => {
+        $http({
+            method: 'DELETE',
+            url: '/users'
+        }).then((response) => {
+            console.log(response);
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
 }]);
