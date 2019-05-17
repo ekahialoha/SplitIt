@@ -61,4 +61,21 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         });
     };
+
+    this.createBill = () => {
+        $http({
+            method: 'POST',
+            url: '/bills',
+            data: {
+                title: this.billTitle,
+                total: this.billTotal,
+                dueDate: this.billDueDate,
+                members: this.billUsers
+            }
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
 }]);

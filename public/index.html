@@ -28,5 +28,14 @@
             <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
             <input type="submit" name="Create House">
         </form>
+
+        <h1>Bills</h1>
+        <form ng-submit="ctrl.createBill();">
+            <input type="text" placeholder="Bill Title" ng-model="ctrl.billTitle">
+            <input type="number" placeholder="Bill Total" ng-model="ctrl.billTotal">
+            <input type="date" placeholder="Due Date" ng-model="ctrl.billDueDate">
+            <input type="text" placeholder="Roommates" ng-model="ctrl.billUsers">
+            <input type="submit" value="Add Bill">
+        </form>
     </body>
 </html>

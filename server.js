@@ -22,6 +22,9 @@ app.use('/users', usersController);
 const houseController = require('./controllers/house.js');
 app.use('/house', houseController);
 
+const billsController = require('./controllers/bills.js');
+app.use('/bills', billsController);
+
 app.get('/splitit', (req, res) => {
     res.send('Hello World');
 });
