@@ -15,7 +15,7 @@ app.use(sessions({
     saveUninitialized: false
 }));
 
-app.get('/', (req, res) => {
+app.get('/splitit', (req, res) => {
     res.send('Hello World');
 });
 
