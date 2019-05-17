@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="SplitIt">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js" charset="utf-8"></script>
+        <script src="/js/app.js" charset="utf-8"></script>
+    </head>
+    <body ng-controller="SplitItController as ctrl">
+        <h1>Registration</h1>
+        <form ng-submit="ctrl.signUp();">
+            <input type="text" placeholder="Name" ng-model="ctrl.createName" />
+            <input type="text" placeholder="Username" ng-model="ctrl.createUsername" />
+            <input type="email" placeholder="Email" ng-model="ctrl.createEmail" />
+            <input type="password" placeholder="Password" ng-model="ctrl.createPassword" />
+            <input type="submit" value="Create Account">
+        </form>
+    </body>
+</html>
