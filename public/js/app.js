@@ -21,4 +21,19 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         });
     };
+
+    this.logIn = () => {
+        $http({
+            method: 'POST',
+            url: '/users/login',
+            data: {
+                username: this.loginUsername,
+                password: this.loginPassword
+            }
+        }).then((response) => {
+            console.log(response);
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
 }]);

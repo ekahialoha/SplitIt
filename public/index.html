@@ -15,5 +15,11 @@
             <input type="password" placeholder="Password" ng-model="ctrl.createPassword" />
             <input type="submit" value="Create Account">
         </form>
+        <h1>Login</h1>
+        <form ng-submit="ctrl.logIn();">
+            <input type="text" placeholder="Username" ng-model="ctrl.loginUsername" />
+            <input type="password" placeholder="Password" ng-model="ctrl.loginPassword" />
+            <input type="submit" value="Login">
+        </form>
     </body>
 </html>
