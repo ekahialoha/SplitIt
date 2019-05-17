@@ -23,7 +23,10 @@ app.listen(PORT, () => {
     console.log("I'm listening...");
 })
 
-mongoose.connect(MONGODB, {useNewUrlParser:true});
+mongoose.connect(MONGODB, {
+    useNewUrlParser: true,
+    useCreateIndex: true
+});
 mongoose.connection.once('open', ()=>{
     console.log('connected to mongo');
 })
