@@ -47,4 +47,18 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         });
     };
+
+    this.createHouse = () => {
+        $http({
+            method: 'POST',
+            url: '/house',
+            data: {
+                name: this.name
+            }
+        }). then((response)=>{
+            console.log(response);
+        }).catch((err)=> {
+            console.log(err);
+        });
+    };
 }]);

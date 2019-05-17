@@ -3,6 +3,8 @@ const houses = express.Router();
 
 const House = require('../models/house.js');
 
+const checkAuth = require('../middleware/checkauth.js')
+
 //INDEX
 houses.get('/', (req, res) => {
 	House.find({}, (err, foundHouse)=> {
@@ -18,8 +20,11 @@ houses.delete('/:id', (req, res)=>{
 });
 
 //CREATE
-houses.post('/', (req, res) => {
-	House.create(req.body, (err, createdHouse) => {
+houses.post('/', checkAuth, (req, res) => {
+	House.create({
+		name: req.body.name,
+		owner: req.session.user._id
+	},  (err, createdHouse) => {
 		res.json(createdHouse);
 	});
 });

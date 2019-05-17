@@ -22,5 +22,11 @@
             <input type="submit" value="Login">
         </form>
         <button type="button" ng-click="ctrl.logOut();">Log Out</button>
+
+        <h1>Create House</h1>
+        <form ng-submit="ctrl.createHouse();">
+            <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
+            <input type="submit" name="Create House">
+        </form>
     </body>
 </html>
