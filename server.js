@@ -15,6 +15,13 @@ app.use(sessions({
     saveUninitialized: false
 }));
 
+
+const usersController = require('./controllers/users.js');
+app.use('/users', usersController);
+
+const houseController = require('./controllers/house.js');
+app.use('/house', houseController);
+
 app.get('/splitit', (req, res) => {
     res.send('Hello World');
 });
