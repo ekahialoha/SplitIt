@@ -10,7 +10,7 @@ const Users = require('../models/users.js');
 // ================
 router.post('/', (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    User.create(req.body, (err, createdUser) => {
+    Users.create(req.body, (err, createdUser) => {
         res.status(201).json({
             message: 'created'
         });
@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
 // Login
 // =========
 router.post('/login', (req, res) => {
-    User.findOne({ username: req.body.username }, (err, foundUser) => {
+    Users.findOne({ username: req.body.username }, (err, foundUser) => {
         if (!foundUser || !bcrypt.compareSync(req.body.password, foundUser.password)) {
             res.status(401).json({
                 message: 'invalid'
