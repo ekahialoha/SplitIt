@@ -29,13 +29,29 @@
             <input type="submit" name="Create House">
         </form>
 
-        <h1>Bills</h1>
-        <form ng-submit="ctrl.createBill();">
-            <input type="text" placeholder="Bill Title" ng-model="ctrl.billTitle">
-            <input type="number" placeholder="Bill Total" ng-model="ctrl.billTotal">
-            <input type="date" placeholder="Due Date" ng-model="ctrl.billDueDate">
-            <input type="text" placeholder="Roommates" ng-model="ctrl.billUsers">
-            <input type="submit" value="Add Bill">
-        </form>
+        <div class="bills">
+            <h1>Bills</h1>
+            <ul>
+                <li ng-repeat="bill in ctrl.bills">
+                    <h3>{{ bill.title }}</h3>
+                    <h3>{{ bill.total }}</h3>
+                    <h5>{{ bill.dueDate }}</h5>
+                    <ul>
+                        <li>{{ bill.members }}</li>
+                    </ul>
+                </li>
+            </ul>
+            <form ng-submit="ctrl.createBill();">
+                <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle">
+                <input type="number" placeholder="Bill Total" ng-model="ctrl.newBillTotal">
+                <input type="date" id="start"
+                value="2019-05-18"
+                min="2019-01-01"
+                max="2019-12-31"
+                ng-model="ctrl.newBillDueDate">
+                <input type="text" placeholder="Roommates" ng-model="ctrl.newBillUsers">
+                <input type="submit" value="Add Bill">
+            </form>
+        </div>
     </body>
 </html>

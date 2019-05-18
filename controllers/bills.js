@@ -3,6 +3,7 @@ const bills = express.Router();
 
 const Bills = require('../models/bills.js');
 
+const checkAuth = require('../middleware/checkauth.js');
 
 //-- INDEX ROUTE --//
 bills.get('/', (req, res) => {
@@ -12,7 +13,7 @@ bills.get('/', (req, res) => {
 });
 
 //-- CREATE BILL ROUTE --//
-bills.post('/', (req, res) => {
+bills.post('/', checkAuth, (req, res) => {
 	Bills.create(req.body, (err, createdBill) => {
         res.json(createdBill);
     });

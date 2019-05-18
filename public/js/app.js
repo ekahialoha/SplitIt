@@ -1,6 +1,9 @@
 const app = angular.module('SplitIt', []);
 
 app.controller('SplitItController', ['$http', function($http) {
+    this.bills = [];
+
+
     this.signUp = () => {
         $http({
             method: 'POST',
@@ -67,10 +70,10 @@ app.controller('SplitItController', ['$http', function($http) {
             method: 'POST',
             url: '/bills',
             data: {
-                title: this.billTitle,
-                total: this.billTotal,
-                dueDate: this.billDueDate,
-                members: this.billUsers
+                title: this.newBillTitle,
+                total: this.newBillTotal,
+                dueDate: this.newBillDueDate,
+                members: this.newBillUsers
             }
         }).then((response) => {
             console.log(response);
