@@ -5,14 +5,21 @@ const bcrypt = require('bcrypt');
 
 const Users = require('../models/users.js');
 
+const checkAuth = require('../middleware/checkauth.js');
+
 // ================
 // Registration
 // ================
 router.post('/', (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     Users.create(req.body, (err, createdUser) => {
+        // We don't need the password for our purposes
+        delete createdUser.password;
+
+        req.session.user = createdUser;
         res.status(201).json({
-            message: 'created'
+            message: 'created',
+            user: createdUser
         });
     });
 });
@@ -29,7 +36,7 @@ router.post('/login', (req, res) => {
         } else {
             // We don't need the password for our purposes
             delete foundUser.password;
-            
+
             req.session.user = foundUser;
             res.status(200).json({
                 message: 'logged-in',
@@ -53,17 +60,11 @@ router.delete('/', (req, res) => {
 // ==================
 // Validate Session
 // ==================
-router.get('/validate-auth', (req, res) => {
-    if (req.session.user) {
-        res.status(200).json({
-            message: 'logged-in',
-            user: req.session.user
-        });
-    } else {
-        res.status(401).json({
-            message: 'not-logged-in'
-        });
-    }
+router.get('/validate-auth', checkAuth, (req, res) => {
+    res.status(200).json({
+        message: 'logged-in',
+        user: req.session.user
+    });
 });
 
 module.exports = router;

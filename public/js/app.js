@@ -3,8 +3,10 @@ const app = angular.module('SplitIt', []);
 app.controller('SplitItController', ['$http', function($http) {
     this.bills = [];
     this.house = '';
+    this.user = null;
+    this.pageError = null;
 
-    this.includePath = 'partials/users.html';
+    this.includePath = 'partials/' + (!this.user ? 'auth' : 'users') + '.html';
     this.changeInclude = (path) => {
         this.includePath = 'partials/'+ path +'.html';
     }
@@ -25,6 +27,10 @@ app.controller('SplitItController', ['$http', function($http) {
             this.createUsername = '';
             this.createEmail = '';
             this.createPassword = '';
+
+            // Log user in
+            this.user = response.data.user;
+            this.changeInclude('users');
         }).catch((err) => {
             console.log(err);
         });
@@ -40,8 +46,13 @@ app.controller('SplitItController', ['$http', function($http) {
             }
         }).then((response) => {
             console.log(response);
+            this.user = response.data.user;
+            this.loginUsername = '';
+            this.loginPassword = '';
+            this.changeInclude('users');
         }).catch((err) => {
             console.log(err);
+            this.pageError = 'Invalid Credentials';
         });
     };
 
@@ -51,6 +62,8 @@ app.controller('SplitItController', ['$http', function($http) {
             url: '/users'
         }).then((response) => {
             console.log(response);
+            this.user = null;
+            this.changeInclude('auth');
         }).catch((err) => {
             console.log(err);
         });
@@ -142,5 +155,19 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(error);
         })
     }
-   
+
+    this.init = () => {
+        $http({
+            method: 'GET',
+            url: '/users/validate-auth'
+        }).then((response) => {
+            console.log(response);
+            this.user = response.data.user;
+            this.changeInclude('users');
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+    this.init();
+
 }]);
