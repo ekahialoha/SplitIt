@@ -60,7 +60,6 @@ app.controller('SplitItController', ['$http', function($http) {
                 name: this.houseName
             }
         }). then((response)=>{
-            controller.getHouse();
             console.log(response);
         }).catch((err)=> {
             console.log(err);
