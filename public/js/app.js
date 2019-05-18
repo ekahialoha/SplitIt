@@ -2,7 +2,7 @@ const app = angular.module('SplitIt', []);
 
 app.controller('SplitItController', ['$http', function($http) {
     this.bills = [];
-
+    this.house = '';
 
     this.signUp = () => {
         $http({
@@ -51,6 +51,7 @@ app.controller('SplitItController', ['$http', function($http) {
         });
     };
 
+
     this.createHouse = () => {
         $http({
             method: 'POST',
@@ -59,11 +60,54 @@ app.controller('SplitItController', ['$http', function($http) {
                 name: this.houseName
             }
         }). then((response)=>{
+            controller.getHouse();
             console.log(response);
         }).catch((err)=> {
             console.log(err);
         });
     };
+
+    this.getHouse = () => {
+        $http({
+            method: 'GET',
+            url: '/house',
+        }). then((response)=>{
+            controller.getHouse();
+            console.log(response);
+        }).catch((err)=> {
+            console.log(err);
+        });
+
+    };
+
+    this.editHouse = (house)=>{
+        $http({
+            method:'PUT',
+            url:'/house/' + house._id,
+            data: {
+            name: this.updatedHouseName
+            }
+        }).then((response)=>{  
+            controller.getHouse();  
+            console.log(response);
+        }).catch((err)=> {
+            console.log(err);
+        });
+    };
+
+    this.deleteHouse = (house)=>{
+        $http({
+            method:'DELETE',
+            url:'/house/' + house._id
+        }).then((response)=>{
+            controller.getHouse();
+            controller.indexOfEditFormToShow = null;
+            console.log(response);
+        }).catch((err)=> {
+            console.log(err);
+        });
+    };
+
 
     this.createBill = () => {
         $http({
@@ -81,4 +125,5 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(error);
         })
     }
+    const controller = this;
 }]);
