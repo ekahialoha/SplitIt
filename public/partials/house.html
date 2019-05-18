@@ -1,0 +1,23 @@
+<h1 >Create House</h1>
+<form ng-submit="ctrl.createHouse();">
+    <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
+    <input type="submit" name="Create House">
+</form>
+
+<ul>
+    <li>
+        <h3>{{ house.name }}</h3>
+        <button ng-click="ctrl.deleteHouse(house)">
+         Delete House
+        </button>
+<form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="      ctrl.editHouse(house)">
+    <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
+    <input type="submit" value="Update Name"/>
+</form>
+    <a ng-if="$index !== ctrl.indexOfEditFormToShow"
+    href="#"
+    ng-click="ctrl.indexOfEditFormToShow = $index">
+      Edit House
+    </a>
+    </li>
+</ul>
