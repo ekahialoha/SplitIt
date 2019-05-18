@@ -4,6 +4,11 @@ app.controller('SplitItController', ['$http', function($http) {
     this.bills = [];
     this.house = '';
 
+    this.includePath = 'partials/users.html';
+    this.changeInclude = (path) => {
+        this.includePath = 'partials/'+ path +'.html';
+    }
+
     this.signUp = () => {
         $http({
             method: 'POST',
@@ -86,8 +91,8 @@ app.controller('SplitItController', ['$http', function($http) {
             data: {
             name: this.updatedHouseName
             }
-        }).then((response)=>{  
-            controller.getHouse();  
+        }).then((response)=>{
+            controller.getHouse();
             console.log(response);
         }).catch((err)=> {
             console.log(err);
@@ -107,6 +112,17 @@ app.controller('SplitItController', ['$http', function($http) {
         });
     };
 
+    this.getBills = () => {
+        $http({
+            method: 'GET',
+            url: '/bills'
+        }).then((response) => {
+            console.log(response);
+            this.bills = response.data;
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
     this.createBill = () => {
         $http({
@@ -120,6 +136,7 @@ app.controller('SplitItController', ['$http', function($http) {
             }
         }).then((response) => {
             console.log(response);
+            this.getBills();
         }).catch((error) => {
             console.log(error);
         })

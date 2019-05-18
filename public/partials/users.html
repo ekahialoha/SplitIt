@@ -1,0 +1,15 @@
+<h1>Registration</h1>
+<form ng-submit="ctrl.signUp();">
+    <input type="text" placeholder="Name" ng-model="ctrl.createName" />
+    <input type="text" placeholder="Username" ng-model="ctrl.createUsername" />
+    <input type="email" placeholder="Email" ng-model="ctrl.createEmail" />
+    <input type="password" placeholder="Password" ng-model="ctrl.createPassword" />
+    <input type="submit" value="Create Account">
+</form>
+<h1>Login</h1>
+<form ng-submit="ctrl.logIn();">
+    <input type="text" placeholder="Username" ng-model="ctrl.loginUsername" />
+    <input type="password" placeholder="Password" ng-model="ctrl.loginPassword" />
+    <input type="submit" value="Login">
+</form>
+<button type="button" ng-click="ctrl.logOut();">Log Out</button>

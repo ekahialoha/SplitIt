@@ -8,69 +8,7 @@
 
     </head>
     <body ng-controller="SplitItController as ctrl">
-        <h1>Registration</h1>
-        <form ng-submit="ctrl.signUp();">
-            <input type="text" placeholder="Name" ng-model="ctrl.createName" />
-            <input type="text" placeholder="Username" ng-model="ctrl.createUsername" />
-            <input type="email" placeholder="Email" ng-model="ctrl.createEmail" />
-            <input type="password" placeholder="Password" ng-model="ctrl.createPassword" />
-            <input type="submit" value="Create Account">
-        </form>
-        <h1>Login</h1>
-        <form ng-submit="ctrl.logIn();">
-            <input type="text" placeholder="Username" ng-model="ctrl.loginUsername" />
-            <input type="password" placeholder="Password" ng-model="ctrl.loginPassword" />
-            <input type="submit" value="Login">
-        </form>
-        <button type="button" ng-click="ctrl.logOut();">Log Out</button>
-
-        <h1 >Create House</h1>
-        <form ng-submit="ctrl.createHouse();">
-            <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
-            <input type="submit" name="Create House">
-        </form>
-
-        <ul>
-            <li>
-                <h3>{{ house.name }}</h3>  
-                <button ng-click="ctrl.deleteHouse(house)">
-                 Delete House
-                </button>
-        <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="      ctrl.editHouse(house)">
-            <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
-            <input type="submit" value="Update Name"/>
-        </form>  
-            <a ng-if="$index !== ctrl.indexOfEditFormToShow"
-            href="#"
-            ng-click="ctrl.indexOfEditFormToShow = $index">
-              Edit House 
-            </a>
-            </li>    
-        </ul>
-
-        <div class="bills">
-            <h1>Bills</h1>
-            <ul>
-                <li ng-repeat="bill in ctrl.bills">
-                    <h3>{{ bill.title }}</h3>
-                    <h3>{{ bill.total }}</h3>
-                    <h5>{{ bill.dueDate }}</h5>
-                    <ul>
-                        <li>{{ bill.members }}</li>
-                    </ul>
-                </li>
-            </ul>
-            <form ng-submit="ctrl.createBill();">
-                <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle">
-                <input type="number" placeholder="Bill Total" ng-model="ctrl.newBillTotal">
-                <input type="date" id="start"
-                value="2019-05-18"
-                min="2019-01-01"
-                max="2019-12-31"
-                ng-model="ctrl.newBillDueDate">
-                <input type="text" placeholder="Roommates" ng-model="ctrl.newBillUsers">
-                <input type="submit" value="Add Bill">
-            </form>
-        </div>
+        <div ng-include="ctrl.includePath">
+        </div>    
     </body>
 </html>
