@@ -5,7 +5,7 @@
 </form>
 
 <ul>
-    <li>
+    <li ng-repeat="house in ctrl.house">
         <h3>{{ house.name }}</h3>
         <button ng-click="ctrl.deleteHouse(house)">
          Delete House

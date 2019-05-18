@@ -66,6 +66,7 @@ app.controller('SplitItController', ['$http', function($http) {
             }
         }). then((response)=>{
             console.log(response);
+            this.getHouse()
         }).catch((err)=> {
             console.log(err);
         });
@@ -76,8 +77,8 @@ app.controller('SplitItController', ['$http', function($http) {
             method: 'GET',
             url: '/house',
         }). then((response)=>{
-            controller.getHouse();
             console.log(response);
+            this.house = response.data;
         }).catch((err)=> {
             console.log(err);
         });
@@ -92,7 +93,8 @@ app.controller('SplitItController', ['$http', function($http) {
             name: this.updatedHouseName
             }
         }).then((response)=>{
-            controller.getHouse();
+            this.getHouse()
+            controller.indexOfEditFormToShow = null;
             console.log(response);
         }).catch((err)=> {
             console.log(err);
@@ -104,8 +106,7 @@ app.controller('SplitItController', ['$http', function($http) {
             method:'DELETE',
             url:'/house/' + house._id
         }).then((response)=>{
-            controller.getHouse();
-            controller.indexOfEditFormToShow = null;
+            this.getHouse()
             console.log(response);
         }).catch((err)=> {
             console.log(err);
@@ -141,5 +142,5 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(error);
         })
     }
-    const controller = this;
+   
 }]);
