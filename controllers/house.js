@@ -12,6 +12,14 @@ houses.get('/', (req, res) => {
 	});
 });
 
+houses.get('/', (req, res)=> {
+	House.findById(req.session.user._id).populate('member').exec((err, user)=> {
+		res.json({
+			member: user.member 
+		});
+	})
+});
+
 //DELETE
 houses.delete('/:id', (req, res)=>{
 	House.findByIdAndRemove(req.params.id, (err, deletedHouse) => {
