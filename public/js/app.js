@@ -102,6 +102,14 @@ app.controller('SplitItController', ['$http', function($http) {
         });
     };
 
+    this.loadManageAccount = () => {
+        this.update = {
+            name: this.user.name,
+            email: this.user.email
+        };
+        this.changeInclude('manage-account');
+    };
+
     this.createHouse = () => {
         $http({
             method: 'POST',
