@@ -176,9 +176,9 @@ app.controller('SplitItController', ['$http', function($http) {
             method: 'PUT',
             url: '/bills/' + bill._id,
             data: {
-                title: bill.title,
-                total: bill.total,
-                dueDate: bill.dueDate
+                title: this.updatedTitle,
+                total: this.updatedTotal,
+                dueDate: this.updatedDueDate
             }
         }).then((response) => {
             console.log(response);
