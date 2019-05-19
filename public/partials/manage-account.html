@@ -11,10 +11,10 @@
             name="password"
             placeholder="Password"
             ng-model="ctrl.update.password"
-            ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_\-+=])(?=.*[0-9]).{7,}/"
+            ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_\-+=.,?<>])(?=.*[0-9]).{7,}/"
             ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
              />
-    <p ng-if="updateForm.password.$touched && !updateForm.password.$valid">Password must be at least 7 characters in length and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 symbol (!@#$%^&*()_-+=).</p>
+    <p ng-if="updateForm.password.$touched && !updateForm.password.$valid">Password must be at least 7 characters in length and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 symbol (!@#$%^&*()_-+=.,?<>).</p>
     <input type="password"
             placeholder="Confirm Password"
             ng-model="ctrl.confirmPassword"
