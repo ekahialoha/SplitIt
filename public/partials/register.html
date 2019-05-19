@@ -1,4 +1,7 @@
 <h1>Registration</h1>
+<div ng-if="ctrl.pageError" class="alert alert-danger">
+    Username Taken
+</div>
 <form ng-submit="ctrl.signUp();" name="regForm" novalidate="novalidate">
     <input type="text" name="name" placeholder="Name" ng-model="ctrl.createName" required="required" />
     <p ng-if="regForm.name.$touched && !regForm.name.$valid">You name is required.</p>

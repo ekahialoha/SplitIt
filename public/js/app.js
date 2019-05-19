@@ -46,8 +46,10 @@ app.controller('SplitItController', ['$http', function($http) {
             // Log user in
             this.user = response.data.user;
             this.changeInclude('users');
+            his.pageError = null;
         }).catch((err) => {
             console.log(err);
+            this.pageError = 'username-taken';
         });
     };
 

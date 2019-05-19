@@ -11,16 +11,22 @@ const checkAuth = require('../middleware/checkauth.js');
 // Registration
 // ================
 router.post('/', (req, res) => {
-    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    Users.create(req.body, (err, createdUser) => {
-        // We don't need the password for our purposes
-        delete createdUser.password;
+    Users.findOne({ username: req.body.username.toLowerCase() }, (err, usernameCheck) => {
+        if (usernameCheck) {
+            res.status(400).json({ message: 'username-taken' });
+        } else {
+            req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+            Users.create(req.body, (err, createdUser) => {
+                // We don't need the password for our purposes
+                delete createdUser.password;
 
-        req.session.user = createdUser;
-        res.status(201).json({
-            message: 'created',
-            user: createdUser
-        });
+                req.session.user = createdUser;
+                res.status(201).json({
+                    message: 'created',
+                    user: createdUser
+                });
+            });
+        }
     });
 });
 
