@@ -16,6 +16,7 @@ bills.get('/', (req, res) => {
 bills.post('/', checkAuth, (req, res) => {
 	Bills.create(req.body, (err, createdBill) => {
         res.json(createdBill);
+		console.log(req.body);
     });
 });
 
