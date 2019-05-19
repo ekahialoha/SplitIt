@@ -1,8 +1,26 @@
 <h1>Registration</h1>
-<form ng-submit="ctrl.signUp();">
-    <input type="text" placeholder="Name" ng-model="ctrl.createName" required="required" />
-    <input type="text" placeholder="Username" ng-model="ctrl.createUsername" />
-    <input type="email" placeholder="Email" ng-model="ctrl.createEmail" required="required" />
-    <input type="password" placeholder="Password" ng-model="ctrl.createPassword" required="required" />
-    <input type="submit" value="Create Account">
+<form ng-submit="ctrl.signUp();" name="regForm" novalidate="novalidate">
+    <input type="text" name="name" placeholder="Name" ng-model="ctrl.createName" required="required" />
+    <p ng-if="regForm.name.$touched && !regForm.name.$valid">You name is required.</p>
+    <input type="text" name="username" placeholder="Username" ng-model="ctrl.createUsername" required="required" />
+    <p ng-if="regForm.username.$touched && !regForm.username.$valid">Username is required.</p>
+    <input type="email" name="email" placeholder="Email" ng-model="ctrl.createEmail" required="required" />
+    <p ng-if="regForm.email.$touched && !regForm.email.$valid">A valid email address is required.</p>
+    <input type="password"
+            name="password"
+            placeholder="Password"
+            ng-model="ctrl.createPassword"
+            ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_\-+=])(?=.*[0-9]).{7,}/"
+            ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
+            required="required" />
+    <p ng-if="regForm.password.$touched && !regForm.password.$valid">Password must be at least 7 characters in length and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 symbol (!@#$%^&*()_-+=).</p>
+    <input type="password"
+            placeholder="Confirm Password"
+            ng-model="ctrl.confirmPassword"
+            name="confirm"
+            my-confirm-pass="ctrl.createPassword"
+            ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
+            required="required" />
+    <p ng-if="regForm.confirm.$error.confirm">Password confirmation must match Password</p>
+    <input type="submit" value="Create Account" ng-disabled="!regForm.$valid" />
 </form>

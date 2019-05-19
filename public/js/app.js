@@ -1,5 +1,19 @@
 const app = angular.module('SplitIt', []);
 
+app.directive('myConfirmPass', function() {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: (scope, element, attributes, ngModel) => {
+            ngModel.$parsers.push((currValue) => {
+                const passValidates = currValue === scope.$eval(attributes.myConfirmPass);
+                ngModel.$setValidity('confirm', passValidates);
+                return (passValidates) ? currValue : undefined;
+            });
+        }
+    };
+});
+
 app.controller('SplitItController', ['$http', function($http) {
     this.bills = [];
     this.house = '';
@@ -51,6 +65,7 @@ app.controller('SplitItController', ['$http', function($http) {
             this.loginUsername = '';
             this.loginPassword = '';
             this.changeInclude('users');
+            this.pageError = null;
         }).catch((err) => {
             console.log(err);
             this.pageError = 'Invalid Credentials';
@@ -79,9 +94,11 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(response);
             this.update = {};
             this.user = response.data.user;
+            this.pageError = null;
             this.changeInclude('users');
         }).catch((err) => {
             console.log(err);
+            this.pageError = 'CurrentPasswordMismatch';
         });
     };
 
