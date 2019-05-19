@@ -11,9 +11,17 @@
                 <button type="button" ng-click="ctrl.editBill(bill)">EDIT</button>
                 <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
             </div>
-            <ul>
+            <div class="container">
+                <form ng-submit="ctrl.updateBill(bill)">
+                    <input type="text" placeholder="Bill Title" ng-model="ctrl.bill.title">
+                    <input type="number" placeholder="Bill Total" ng-model="ctrl.bill.total">
+                    <input type="date" placeholder="Bill Due Date" ng-model="ctrl.bill.dueDate">
+                    <input type="submit" value="UPDATE">
+                </form>
+            </div>
+            <!-- <ul>
                 <li>{{ bill.members }}</li>
-            </ul>
+            </ul> -->
         </li>
     </ul>
     <form ng-submit="ctrl.createBill();">

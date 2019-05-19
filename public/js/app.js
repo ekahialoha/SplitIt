@@ -171,6 +171,38 @@ app.controller('SplitItController', ['$http', function($http) {
         })
     };
 
+    this.updateBill = (bill) => {
+        $http({
+            method: 'PUT',
+            url: '/bills/' + bill._id,
+            data: {
+                title: bill.title,
+                total: bill.total,
+                dueDate: bill.dueDate
+            }
+        }).then((response) => {
+            console.log(response);
+            this.getBills();
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
+    this.deleteBill = (id) => {
+        $http({
+            method: 'DELETE',
+            url: '/bills/' + id
+        }).then((deleteBill) => {
+            console.log(deleteBill);
+            const index = this.bills.findIndex(bill => {
+                return bill._id === id;
+            });
+            this.bills.splice(index, 1);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     this.init = () => {
         $http({
             method: 'GET',
