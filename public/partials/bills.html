@@ -2,9 +2,15 @@
     <h1>Bills</h1>
     <ul>
         <li ng-repeat="bill in ctrl.bills">
-            <h3>{{ bill.title }}</h3>
-            <h3>{{ bill.total }}</h3>
-            <h5>{{ bill.dueDate }}</h5>
+            <div class="bill-info">
+                <h3>{{ bill.title | uppercase}}</h3>
+                <h3>{{ bill.total | currency}}</h3>
+                <h5>{{ bill.dueDate | date: 'MM/dd/yyyy'}}</h5>
+            </div>
+            <div class="menu-buttons">
+                <button type="button" ng-click="ctrl.editBill(bill)">EDIT</button>
+                <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
+            </div>
             <ul>
                 <li>{{ bill.members }}</li>
             </ul>
