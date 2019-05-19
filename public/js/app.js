@@ -165,6 +165,9 @@ app.controller('SplitItController', ['$http', function($http) {
             }
         }).then((response) => {
             console.log(response);
+            this.newBillTitle = '';
+            this.newBillTotal = '';
+            this.newBillDueDate = '';
             this.getBills();
         }).catch((error) => {
             console.log(error);
@@ -183,6 +186,7 @@ app.controller('SplitItController', ['$http', function($http) {
         }).then((response) => {
             console.log(response);
             this.getBills();
+            this.indexOfEditFormToShow = null;
         }).catch((error) => {
             console.log(error);
         })

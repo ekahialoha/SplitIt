@@ -1,18 +1,19 @@
 <div class="bills">
     <h1>Bills</h1>
+    <button type="button" ng-click="ctrl.getBills()">Show Bills</button>
     <ul>
         <li ng-repeat="bill in ctrl.bills">
             <div class="bill-info">
                 <h3>{{ bill.title | uppercase}}</h3>
-                <h3>{{ bill.total | currency}}</h3>
-                <h5>{{ bill.dueDate | date: 'MM/dd/yyyy'}}</h5>
+                <h3>Ammount Due: {{ bill.total | currency}}</h3>
+                <h5>Due By: {{ bill.dueDate | date: 'MM/dd/yyyy'}}</h5>
             </div>
             <div class="menu-buttons">
-                <button type="button" ng-click="ctrl.editBill(bill)">EDIT</button>
+                <button type="button" ng-if="$index !== ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = $index">EDIT</button>
                 <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
             </div>
             <div class="container">
-                <form ng-submit="ctrl.updateBill(bill)">
+                <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateBill(bill)">
                     <input type="text" placeholder="Bill Title" ng-model="ctrl.updatedTitle">
                     <input type="number" placeholder="Bill Total" ng-model="ctrl.updatedTotal">
                     <input type="date" placeholder="Bill Due Date" ng-model="ctrl.updatedDueDate">
