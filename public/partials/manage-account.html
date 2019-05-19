@@ -1,0 +1,10 @@
+<h1>Manage Account</h1>
+<form ng-submit="ctrl.updateUser();">
+    <input type="text" placeholder="Name" ng-model="ctrl.update.name" />
+    <input type="email" placeholder="Email" ng-model="ctrl.update.email" />
+    <input type="password" placeholder="New Password (OPTIONAL)" ng-model="ctrl.update.password" />
+
+
+    <input type="password" placeholder="Current Password" ng-model="ctrl.update.currentPassword" required="required" />
+    <input type="submit" value="Update Account">
+</form>

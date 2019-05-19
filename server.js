@@ -35,7 +35,8 @@ app.listen(PORT, () => {
 
 mongoose.connect(MONGODB, {
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 mongoose.connection.once('open', ()=>{
     console.log('connected to mongo');
