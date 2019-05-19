@@ -67,4 +67,32 @@ router.get('/validate-auth', checkAuth, (req, res) => {
     });
 });
 
+// ==================
+// User Management
+// ==================
+router.put('/', checkAuth, (req, res) => {
+    Users.findById(req.session.user._id, (err, foundUser) => {
+        if (!bcrypt.compareSync(req.body.currentPassword, foundUser.password)) {
+            res.status(401).json({
+                message: 'invalid'
+            });
+        } else {
+            if (req.body.password) {
+                req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+            }
+            console.log(req.body);
+            Users.findByIdAndUpdate(foundUser._id, req.body, { new: true }, (err, updatedUser) => {
+                // We don't need the password for our purposes
+                delete updatedUser.password;
+
+                req.session.user = updatedUser;
+                res.status(200).json({
+                    message: 'updated-user',
+                    user: updatedUser
+                });
+            });
+        }
+    });
+});
+
 module.exports = router;

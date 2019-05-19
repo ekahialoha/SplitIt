@@ -1,4 +1,6 @@
 <h1>Landing Page</h1>
+<h2>Welcome {{ctrl.user.name}}!</h2>
 <button type="button" ng-if="ctrl.user" ng-click="ctrl.logOut();">Log Out</button>
 <button type="button" ng-click="ctrl.changeInclude('house')">View House</button>
 <button type="button" ng-click="ctrl.changeInclude('bills')">View Bills</button>
+<button type="button" ng-if="ctrl.user" ng-click="ctrl.changeInclude('manage-account');">Manage Account</button>
