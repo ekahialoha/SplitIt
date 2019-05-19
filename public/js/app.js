@@ -78,6 +78,7 @@ app.controller('SplitItController', ['$http', function($http) {
         }).then((response) => {
             console.log(response);
             this.update = {};
+            this.user = response.data.user;
             this.changeInclude('users');
         }).catch((err) => {
             console.log(err);
