@@ -13,6 +13,7 @@ bills.get('/', (req, res) => {
 	});
 });
 
+
 //-- CREATE BILL ROUTE --//
 bills.post('/', checkAuth, (req, res) => {
 	Bills.create(req.body, (err, createdBill) => {

@@ -1,4 +1,6 @@
 <div class="houseBills">
+    <button type="button" ng-click="ctrl.getHouse()">Show House</button>
+    <button type="button" ng-click="ctrl.getUser()">Show User</button>
     <h1 ng-repeat="house in ctrl.house">{{ house.name }} House Bills</h1>
     <button type="button" ng-click="ctrl.changeInclude('users')">Back To My Account</button>
     <button type="button" ng-click="ctrl.getBills()">Show Bills</button>
@@ -18,6 +20,9 @@
                     <input type="text" placeholder="Bill Title" ng-model="ctrl.updatedTitle">
                     <input type="number" placeholder="Bill Total" ng-model="ctrl.updatedTotal">
                     <input type="date" placeholder="Bill Due Date" ng-model="ctrl.updatedDueDate">
+                    <span ng-repeat="user in ctrl.users">
+                        {{ user.username }} Has Paid: <input type="checkbox" ng-model="ctrl.hasPaid">
+                    </span>
                     <input type="submit" value="UPDATE">
                     <button type="button" ng-if="$index === ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = null">CANCEL</button>
                 </form>
