@@ -1,10 +1,38 @@
-<h1>Login</h1>
-<div ng-if="ctrl.pageError" class="alert alert-danger">
-    Invalid Credentials Supplied
+<div class="container">
+    <div class="card mt-5 shadow rounded-lg">
+        <h3 class="card-header text-uppercase">Login</h3>
+        <main class="card-body">
+            <div ng-if="ctrl.pageError" class="alert alert-danger">
+                Invalid Credentials Supplied
+            </div>
+            <form ng-submit="loginForm.$valid && ctrl.logIn();" name="loginForm" novalidate="novalidate">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text"
+                            class="form-control"
+                            name="username"
+                            placeholder="Username"
+                            ng-model="ctrl.loginUsername"
+                            ng-class="{'is-invalid':(loginForm.$submitted || loginForm.username.$touched) && !loginForm.username.$valid}"
+                            id="loginUsername"
+                            required="required" />
+                    <div class="invalid-feedback">Please enter your username</div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password"
+                            class="form-control"
+                            name="password"
+                            placeholder="Password"
+                            ng-model="ctrl.loginPassword"
+                            ng-class="{'is-invalid':(loginForm.$submitted || loginForm.password.$touched) && !loginForm.password.$valid}"
+                            id="loginPassword"
+                            required="required" />
+                    <div class="invalid-feedback">Please enter your password</div>
+                </div>
+                <input type="submit" class="btn btn-outline-info btn-block my-4" value="Login">
+            </form>
+            <p class="text-center">Not a member? <span class="pointer" ng-click="ctrl.changeInclude('register')">Register</span></p>
+        </main>
+    </div>
 </div>
-<form ng-submit="ctrl.logIn();">
-    <input type="text" placeholder="Username" ng-model="ctrl.loginUsername" required="required" />
-    <input type="password" placeholder="Password" ng-model="ctrl.loginPassword" required="required" />
-    <input type="submit" value="Login">
-</form>
-<button type="button" ng-click="ctrl.changeInclude('register')">Register Account</button>
