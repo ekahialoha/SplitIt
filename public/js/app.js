@@ -110,7 +110,7 @@ app.controller('SplitItController', ['$http', function($http) {
             url: '/users',
         }). then((response)=>{
             console.log(response);
-            this.user = response.data;
+            this.allUsers = response.data;
         }).catch((err)=> {
             console.log(err);
         });
@@ -126,14 +126,13 @@ app.controller('SplitItController', ['$http', function($http) {
         this.changeInclude('manage-account');
     };
 
-    this.createHouse = () => {
+     this.createHouse = () => {
         $http({
             method: 'POST',
             url: '/house',
             data: {
                 name: this.houseName,
-                member: this.houseMember
-
+                owner: this.houseOwner
             }
         }). then((response)=>{
             console.log(response);
@@ -184,6 +183,44 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         });
     };
+    
+
+    this.moveMember = (user)=>{
+        console.log(this.house)
+        $http({
+            method:'PUT',
+            url:'/house/member/' + this.house._id,
+            data: {
+            member: user
+            }
+        }).then((response)=>{
+            this.house = response.data 
+            console.log(response);
+        }).catch((err)=> {
+            console.log(err);
+        });
+        console.log(user)
+    };
+
+    this.deleteMember = (user) => {
+        console.log(user)
+        $http({
+            method:'DELETE',
+            url: '/house/'+ this.house._id +'/member/' + user
+        }).then((response)=>{
+            console.log(response);
+        }).catch((err)=> {
+            console.log(err);
+        });
+    };
+    
+
+    this.loadHouse = () => {
+        this.getUser()
+        this.getHouse();
+        this.changeInclude('house');
+    }
+
 
     this.getBills = () => {
         $http({

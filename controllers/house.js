@@ -7,27 +7,43 @@ const checkAuth = require('../middleware/checkauth.js')
 
 //INDEX
 houses.get('/', (req, res) => {
-	House.find({}, (err, foundHouse)=> {
+	House.findOne({}).populate('member').exec((err, foundHouse)=> {
 		res.json(foundHouse)
 	});
 });
 
-houses.get('/', (req, res)=> {
-	House.findById(req.session.user._id).populate('member').exec((err, user)=> {
-		res.json({
-			member: user.member 
-		});
-	})
-});
+// houses.get('/', (req, res)=> {
+// 	House.findById(req.session.user._id).populate('member').exec((err, user)=> {
+// 		res.json({
+// 			member: user.member 
+// 		});
+// 	})
+// });
 
 
 
 //DELETE
+
+houses.delete('/:id/member/:userId', (req, res)=> {
+	House.findById(req.params.id, (err, foundHouse) => {
+		console.log(foundHouse.member)
+		console.log(req.params.userId)
+		foundHouse.member = foundHouse.member.filter((existing)=> {
+			return existing.toString() !== req.params.userId;
+		});
+		foundHouse.save((err, updatedHouse)=> {
+			res.json(updatedHouse);
+		});
+	});
+});
+
 houses.delete('/:id', (req, res)=>{
 	House.findByIdAndRemove(req.params.id, (err, deletedHouse) => {
 		res.json(deletedHouse);
 	});
 });
+
+
 
 //CREATE
 houses.post('/', checkAuth, (req, res) => {
@@ -49,5 +65,14 @@ houses.put('/:id', (req, res)=> {
 		res.json(updatedHouse);
 	});
 });
+
+houses.put('/member/:id', (req, res)=> {
+	House.findById(req.params.id, (err, foundHouse) => {
+		foundHouse.member.push(req.body.member)
+		foundHouse.save((err, updatedHouse)=>{
+			res.json(updatedHouse)
+		}) 
+	})
+})
 
 module.exports = houses;

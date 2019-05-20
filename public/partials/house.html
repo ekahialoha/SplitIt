@@ -10,13 +10,26 @@
 <form>
   <i class="fas fa-search" aria-hidden="true"></i>
   <input ng-model="searchBox" class="user-search" type="text" placeholder="Search Users">
-  <li ng-repeat="user in ctrl.users | filter:searchBox">
+  <li ng-repeat="user in ctrl.allUsers | filter:searchBox">
     {{ user.name }}
-     <button ng-click="ctrl.gethUser()">
-         <i class="fas fa-plus"></i>
+     <button ng-click="ctrl.moveMember(user._id)">
+         <i class="fas fa-plus"></i> </button>
       
   </li>
-    
 </form>
+
+<h3>Current Members</h3>
+
+  <ul>
+  <li ng-repeat="member in ctrl.house.member">
+    {{ member.name }}
+      <button ng-click="ctrl.deleteMember(member._id)">
+         <i class="fas fa-trash"></i> </button>
+  </ul>
+    
+
+
+
+
 <button type="button" ng-click="ctrl.changeInclude('house-create')">New House</button>
 
