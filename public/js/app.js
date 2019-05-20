@@ -117,11 +117,14 @@ app.controller('SplitItController', ['$http', function($http) {
             method: 'POST',
             url: '/house',
             data: {
-                name: this.houseName
+                name: this.house.name
+                member: this.house.member
+                bills: this.house.bills
             }
         }). then((response)=>{
             console.log(response);
             this.getHouse()
+            this.changeInclude('house');
         }).catch((err)=> {
             console.log(err);
         });

@@ -1,29 +1,7 @@
-<h1 >Create House</h1>
-<form ng-submit="ctrl.createHouse();">
-    <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
-    <input type="submit" name="Create House">
-</form>
 
-<ul>
-    <li ng-repeat="house in ctrl.house">
-        <h3>{{ house.name }}</h3>
-        <button ng-click="ctrl.deleteHouse(house)">
-         Delete House
-        </button>
-<form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="      ctrl.editHouse(house)">
-    <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
-    <input type="submit" value="Update Name"/>
-</form>
-    <a ng-if="$index !== ctrl.indexOfEditFormToShow"
-    href="#"
-    ng-click="ctrl.indexOfEditFormToShow = $index">
-      Edit House
-    </a>
-    </li>
-</ul>
 <h1 ng-click="getHouse()">House Members</h1>
 <ul>
-    <li ng-repeat="user in ctrl.house.members">
+    <li ng-repeat="user in ctrl.house.member">
         <h3>{{ user.name }}</h3>
 
     </li>
@@ -32,7 +10,14 @@
 
 <form>
   <i class="fas fa-search" aria-hidden="true"></i>
-  <input class="user-search" type="text" placeholder="Search Users">
+  <input ng-model="searchBox" class="user-search" type="text" placeholder="Search Users">
+  <li ng-repeat="user in ctrl.users | filter:searchBox">
+    {{ user.name }}
+     <button ng-click="ctrl.gethUser()">
+         <i class="fas fa-plus"></i>
+      
+  </li>
+    
 </form>
-
+<button type="button" ng-click="ctrl.changeInclude('house-create')">New House</button>
 

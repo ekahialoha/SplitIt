@@ -20,6 +20,8 @@ houses.get('/', (req, res)=> {
 	})
 });
 
+
+
 //DELETE
 houses.delete('/:id', (req, res)=>{
 	House.findByIdAndRemove(req.params.id, (err, deletedHouse) => {
