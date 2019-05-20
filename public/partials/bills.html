@@ -1,11 +1,12 @@
-<div class="bills">
-    <h1>Bills</h1>
+<div class="houseBills">
+    <h1 ng-repeat="house in ctrl.house">{{ house.name }} House Bills</h1>
+    <button type="button" ng-click="ctrl.changeInclude('users')">Back To My Account</button>
     <button type="button" ng-click="ctrl.getBills()">Show Bills</button>
     <ul>
         <li ng-repeat="bill in ctrl.bills">
             <div class="bill-info">
                 <h3>{{ bill.title | uppercase}}</h3>
-                <h3>Ammount Due: {{ bill.total | currency}}</h3>
+                <h3>Amount Due: {{ bill.total | currency}}</h3>
                 <h5>Due By: {{ bill.dueDate | date: 'MM/dd/yyyy'}}</h5>
             </div>
             <div class="menu-buttons">
@@ -18,12 +19,13 @@
                     <input type="number" placeholder="Bill Total" ng-model="ctrl.updatedTotal">
                     <input type="date" placeholder="Bill Due Date" ng-model="ctrl.updatedDueDate">
                     <input type="submit" value="UPDATE">
+                    <button type="button" ng-if="$index === ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = null">CANCEL</button>
                 </form>
             </div>
-            <!-- <ul>
-                <li>{{ bill.members }}</li>
-            </ul> -->
         </li>
+    </ul>
+    <ul>
+        <li ng-repeat="house in ctrl.house">{{ house.member }}</li>
     </ul>
     <form ng-submit="ctrl.createBill();">
         <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle">

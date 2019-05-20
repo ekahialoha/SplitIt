@@ -119,7 +119,7 @@ app.controller('SplitItController', ['$http', function($http) {
             data: {
                 name: this.house.name,
                 member: this.house.member
-                
+
             }
         }). then((response)=>{
             console.log(response);
@@ -198,6 +198,7 @@ app.controller('SplitItController', ['$http', function($http) {
             this.newBillTitle = '';
             this.newBillTotal = '';
             this.newBillDueDate = '';
+            this.newBillUsers = '';
             this.getBills();
         }).catch((error) => {
             console.log(error);

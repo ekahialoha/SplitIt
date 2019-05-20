@@ -2,6 +2,7 @@ const express = require('express');
 const bills = express.Router();
 
 const Bills = require('../models/bills.js');
+const House = require('../models/house.js');
 
 const checkAuth = require('../middleware/checkauth.js');
 
