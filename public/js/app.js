@@ -133,7 +133,7 @@ app.controller('SplitItController', ['$http', function($http) {
             data: {
                 name: this.houseName,
                 member: this.houseMember
-                
+
             }
         }). then((response)=>{
             console.log(response);
@@ -196,6 +196,12 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         })
     };
+
+    this.loadBillsPage = () => {
+        this.getBills();
+        this.getHouse();
+        this.changeInclude('bills');
+    }
 
     this.createBill = () => {
         $http({

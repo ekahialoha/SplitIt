@@ -1,9 +1,7 @@
 <div class="houseBills">
-    <button type="button" ng-click="ctrl.getHouse()">Show House</button>
     <button type="button" ng-click="ctrl.getUser()">Show User</button>
     <h1 ng-repeat="house in ctrl.house">{{ house.name }} House Bills</h1>
     <button type="button" ng-click="ctrl.changeInclude('users')">Back To My Account</button>
-    <button type="button" ng-click="ctrl.getBills()">Show Bills</button>
     <ul>
         <li ng-repeat="bill in ctrl.bills">
             <div class="bill-info">
