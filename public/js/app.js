@@ -104,6 +104,20 @@ app.controller('SplitItController', ['$http', function($http) {
         });
     };
 
+    this.getUser = () => {
+        $http({
+            method: 'GET',
+            url: '/users',
+        }). then((response)=>{
+            console.log(response);
+            this.user = response.data;
+        }).catch((err)=> {
+            console.log(err);
+        });
+
+    };
+
+
     this.loadManageAccount = () => {
         this.update = {
             name: this.user.name,
@@ -117,9 +131,9 @@ app.controller('SplitItController', ['$http', function($http) {
             method: 'POST',
             url: '/house',
             data: {
-                name: this.house.name,
-                member: this.house.member
-
+                name: this.houseName,
+                member: this.houseMember
+                
             }
         }). then((response)=>{
             console.log(response);
@@ -198,7 +212,6 @@ app.controller('SplitItController', ['$http', function($http) {
             this.newBillTitle = '';
             this.newBillTotal = '';
             this.newBillDueDate = '';
-            this.newBillUsers = '';
             this.getBills();
         }).catch((error) => {
             console.log(error);
