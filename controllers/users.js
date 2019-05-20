@@ -101,4 +101,13 @@ router.put('/', checkAuth, (req, res) => {
     });
 });
 
+// ==================
+// User List
+// ==================
+router.get('/', checkAuth, (req, res) => {
+    Users.find({}, {name: 1, username: 1}, (err, users) => {
+        res.json(users);
+    });
+});
+
 module.exports = router;
