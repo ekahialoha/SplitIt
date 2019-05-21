@@ -1,32 +1,33 @@
 <div ng-include="'./partials/nav.html'"></div> 
 <div class="container">
+<div class="manage">
 <h1>Manage Account</h1>
 <div ng-if="ctrl.pageError" class="alert alert-danger">
     Current Password Incorrect.
 </div>
 <form ng-submit="ctrl.updateUser();" name="updateForm" novalidate="novalidate">
-    <input type="text" name="name" placeholder="Name" ng-model="ctrl.update.name" required="required" />
+    username: <input type="text" name="name" placeholder="Name" ng-model="ctrl.update.name" required="required" /></br>
     <p ng-if="updateForm.name.$touched && !updateForm.name.$valid">You name is required.</p>
-    <input type="email" name="email" placeholder="Email" ng-model="ctrl.update.email" required="required" />
+    email: <input type="email" name="email" placeholder="Email" ng-model="ctrl.update.email" required="required" /> </br>
     <p ng-if="updateForm.email.$touched && !updateForm.email.$valid">A valid email address is required.</p>
-    <input type="password"
+    password: <input type="password"
             name="password"
             placeholder="Password"
             ng-model="ctrl.update.password"
             ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_\-+=.,?<>])(?=.*[0-9]).{7,}/"
             ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
-             />
+             /></br>
     <p ng-if="updateForm.password.$touched && !updateForm.password.$valid">Password must be at least 7 characters in length and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 symbol (!@#$%^&*()_-+=.,?<>).</p>
-    <input type="password"
+    confirm password: <input type="password"
             placeholder="Confirm Password"
             ng-model="ctrl.confirmPassword"
             name="confirm"
             my-confirm-pass="ctrl.update.password"
             ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
-             />
+             /></br>
     <p ng-if="updateForm.confirm.$error.confirm">Password confirmation must match Password</p>
-    <input type="password" placeholder="Current Password" ng-model="ctrl.update.currentPassword" required="required" />
-    <input type="submit" value="Update Account" ng-disabled="!updateForm.$valid" />
+    current password: <input type="password" placeholder="Current Password" ng-model="ctrl.update.currentPassword" required="required" /></br>
+    <input type="submit" value="Update Account" ng-disabled="!updateForm.$valid" /> 
 </form>
 </div>
 </div>

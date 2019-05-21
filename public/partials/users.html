@@ -2,17 +2,27 @@
 <div ng-include="'./partials/nav.html'"></div>
 
 <div class="container">
-  <header>
 
+<header class="welcome">
+<p>Welcome, {{ctrl.user.name}}!</p>
+</header>
+<div class="createHouse" ng-if="!ctrl.house">
+    <h1 >Create House</h1>
+    <form ng-submit="ctrl.createHouse();">
+        <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
+        <input type="submit" name="Create House">
+    </form>
+</div>  
 <div class="houseName" ng-if="ctrl.house">
-    <ul> Current House:
-        <li><p>{{ ctrl.house.name }}</p></li>
+    <ul> <h3>Current House:</h3>
+        <li><h5>{{ ctrl.house.name }}</h5></li>
         <span ng-if="ctrl.user._id.toString() === ctrl.house.owner._id.toString()">
         <form ng-if="ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse(house)">
             <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
             <button type="submit">Submit Edit</button>
 
         </form>
+        <div class="editIcons">
         <a ng-if="!ctrl.indexOfEditFormToShow"
         ng-click="ctrl.indexOfEditFormToShow = true">Edit
           <i class="fas fa-edit"></i>
@@ -20,20 +30,11 @@
         <a ng-click="ctrl.deleteHouse(house)">Delete
          <i class="fas fa-trash"></i>
         </a>
+        </div>
         </span>
       </ul>
     </div>
 
-
-  </header>
-<h2>Welcome, {{ctrl.user.name}}!</h2>
-<div class="createHouse" ng-if="!ctrl.house">
-    <h1 >Create House</h1>
-    <form ng-submit="ctrl.createHouse();">
-        <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
-        <input type="submit" name="Create House">
-    </form>
-</div>
 <div ng-if="ctrl.house">
 <div class="memberAdd">
     <ul> <button class="addBtn" ng-click="showAdd = !showAdd">
@@ -63,7 +64,7 @@
       </ul>
     </div>
 <div class="billAdd">
- <button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button>
+ <ul><button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button></ul>
 <div ng-show="showAddBill" >
     <form ng-submit="ctrl.createBill();">
      <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle">
