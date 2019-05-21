@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Landing Page</h1>
 <h2>Welcome {{ctrl.user.name}}!</h2>
 <button type="button" ng-if="ctrl.user" ng-click="ctrl.logOut();">Log Out</button>
@@ -18,7 +19,8 @@
         <h3>{{ ctrl.house.name }}</h3>
         <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse(house)">
             <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
-            <input type="submit" value="Update Name"/>
+            <button type="submit"><i class="fas fa-edit"></i></button>
+            
         </form>
         <a ng-if="$index !== ctrl.indexOfEditFormToShow"
         href="#"
@@ -26,7 +28,7 @@
           Edit House
         </a>
         <button ng-click="ctrl.deleteHouse(house)">
-         Delete House
+         <i class="fas fa-trash"></i>
         </button>
 
     </div>
@@ -91,4 +93,5 @@
         ng-model="ctrl.newBillDueDate">
         <input type="submit" value="Add Bill">
     </form>
+</div>
 </div>
