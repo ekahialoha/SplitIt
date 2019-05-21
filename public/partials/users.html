@@ -15,31 +15,31 @@
       <li>
         <a>About SplitIT</a>
       </li>
-      
+
     </ul>
   </div>
 </nav>
 
 <div class="container">
   <header>
-    
+
 <div class="houseName" ng-if="ctrl.house">
     <ul> Current House:
         <li><p>{{ ctrl.house.name }}</p></li>
+        <span ng-if="ctrl.user._id.toString() === ctrl.house.owner._id.toString()">
         <form ng-if="ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse(house)">
             <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
             <button type="submit">Submit Edit</button>
 
         </form>
         <a ng-if="!ctrl.indexOfEditFormToShow"
-        href="#"
         ng-click="ctrl.indexOfEditFormToShow = true">Edit
           <i class="fas fa-edit"></i>
         </a>
         <a ng-click="ctrl.deleteHouse(house)">Delete
          <i class="fas fa-trash"></i>
         </a>
-        
+        </span>
       </ul>
     </div>
 
@@ -55,11 +55,11 @@
 </div>
 
 <div class="memberAdd">
-    <ul> <button class="addBtn" ng-click="showAdd = !showAdd"> 
+    <ul> <button class="addBtn" ng-click="showAdd = !showAdd">
       Add Member</button>
 <div ng-show="showAdd" >
   <form>
-    <input ng-model="searchBox" class="user-search" type="text" placeholder="Search Members"> 
+    <input ng-model="searchBox" class="user-search" type="text" placeholder="Search Members">
       <i class="fas fa-search" aria-hidden="true"></i>
       <li ng-repeat="user in ctrl.allUsers | filter:searchBox">
         <i class="fas fa-user"></i> {{ user.name }}
@@ -77,25 +77,24 @@
         <h5><i class="fas fa-user"></i> {{ member.name }}
           <a ng-click="ctrl.deleteMember(member._id)">
              <i class="fas fa-trash"></i></a>
-           </li>
          </h5>
+        </li>
       </ul>
     </div>
 </div>
 <div class="billAdd">
- <ul><button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button>
+ <button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button>
 <div ng-show="showAddBill" >
     <form ng-submit="ctrl.createBill();">
-     <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle"></li>
+     <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle">
        <input type="number" placeholder="Bill Total" ng-model="ctrl.newBillTotal">
         <input type="date" id="start"
         value="2019-05-18"
         min="2019-01-01"
         max="2019-12-31"
-        ng-model="ctrl.newBillDueDate"></li>
-       <input type="submit" value="Add Bill"></li>
+        ng-model="ctrl.newBillDueDate">
+       <input type="submit" value="Add Bill">
     </form>
-  </ul>
   </div>
   </div>
   <div class="houseBills">
@@ -109,7 +108,7 @@
             </div>
             <div class="menu-buttons">
                 <button type="button" ng-if="$index !== ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = $index">EDIT</button>
-                <button type="button" ng-model="ctrl.hasPaid" ng-if="!bill.hasPaid.includes(member._id.toString())" ng-click="ctrl.payBill(bill._id)">PAID</button>
+                <button type="button" ng-model="ctrl.hasPaid" ng-disabled="bill.hasPaid.includes(ctrl.user._id.toString())" ng-click="ctrl.payBill(bill._id)">PAID</button>
                 <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
             </div>
             <div class="container">
@@ -127,8 +126,8 @@
             <div class="hasPaid" ng-repeat="member in ctrl.house.allMembers">
                 <ul>
                     <li> {{ member.name }}
-                        <span ng-if="!bill.hasPaid.includes(member._id.toString())">UNPAID</span>
-                        <span ng-if="bill.hasPaid.includes(member._id.toString())">PAID</span>
+                        <span ng-if="!bill.hasPaid.includes(member._id.toString())" class="text-danger font-weight-bold">UNPAID</span>
+                        <span ng-if="bill.hasPaid.includes(member._id.toString())" class="text-success">PAID</span>
                     </li>
                 </ul>
             </div>
