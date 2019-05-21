@@ -12,12 +12,12 @@
         <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
         <input type="submit" name="Create House">
     </form></ul>
-</div>  
+</div>
 <div class="houseName" ng-if="ctrl.house">
     <ul> <h3>Current House:</h3>
         <li><h5>{{ ctrl.house.name }}</h5></li>
         <span ng-if="ctrl.user._id.toString() === ctrl.house.owner._id.toString()">
-        <form ng-if="ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse(house)">
+        <form ng-if="ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse()">
             <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
             <button type="submit">Submit Edit</button>
 
@@ -27,7 +27,7 @@
         ng-click="ctrl.indexOfEditFormToShow = true">Edit
           <i class="fas fa-edit"></i>
         </a>
-        <a ng-click="ctrl.deleteHouse(house)">Delete
+        <a ng-click="ctrl.deleteHouse()">Delete
          <i class="fas fa-trash"></i>
         </a>
         </div>
@@ -93,7 +93,7 @@
                 <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
             </div>
             <div>
-                <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateBill(bill)">
+                <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateBill(bill_.id)">
                     <input type="text" placeholder="Bill Title" ng-model="ctrl.updatedTitle">
                     <input type="number" placeholder="Bill Total" ng-model="ctrl.updatedTotal">
                     <input type="date" placeholder="Bill Due Date" ng-model="ctrl.updatedDueDate"
