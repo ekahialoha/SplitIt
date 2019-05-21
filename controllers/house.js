@@ -7,20 +7,13 @@ const checkAuth = require('../middleware/checkauth.js')
 
 //INDEX
 houses.get('/', (req, res) => {
-	House.findOne({}).populate('member').exec((err, foundHouse)=> {
+	House.findOne({ $or: [
+		{owner: req.session.user._id},
+		{member: {$in: [req.session.user._id]}}
+	]}).populate('member').exec((err, foundHouse)=> {
 		res.json(foundHouse)
 	});
 });
-
-// houses.get('/', (req, res)=> {
-// 	House.findById(req.session.user._id).populate('member').exec((err, user)=> {
-// 		res.json({
-// 			member: user.member 
-// 		});
-// 	})
-// });
-
-
 
 //DELETE
 
@@ -42,8 +35,6 @@ houses.delete('/:id', (req, res)=>{
 		res.json(deletedHouse);
 	});
 });
-
-
 
 //CREATE
 houses.post('/', checkAuth, (req, res) => {
@@ -71,8 +62,8 @@ houses.put('/member/:id', (req, res)=> {
 		foundHouse.member.push(req.body.member)
 		foundHouse.save((err, updatedHouse)=>{
 			res.json(updatedHouse)
-		}) 
-	})
-})
+		});
+	});
+});
 
 module.exports = houses;
