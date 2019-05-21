@@ -16,7 +16,7 @@
                             ng-class="{'is-invalid':(regForm.$submitted || regForm.name.$touched) && !regForm.name.$valid}"
                             id="regName"
                             required="required" />
-                    <div class="invalid-feedback">Please enter your name.</div>
+                    <div class="invalid-feedback">Please enter your name</div>
                 </div>
                 <div class="form-group">
                     <label for="regUsername">Username</label>
@@ -29,10 +29,10 @@
                             ng-class="{'is-invalid':(regForm.$submitted || regForm.username.$touched) && !regForm.username.$valid}"
                             id="regUsername"
                             required="required" />
+                    <div class="invalid-feedback">Please choose a valid and unique username</div>
                     <small id="regUsernameHelpBlock" class="form-text text-muted">
-                        Your username must be between 5-30 characters in length. It may contain letters, numbers, and the special characters .-.
+                        Your username must be between 5-30 characters in length. It may contain letters, numbers, and the special characters .-
                     </small>
-                    <div class="invalid-feedback">Please choose a valid and unique username.</div>
                 </div>
                 <div class="form-group">
                     <label for="regEmail">Email</label>
@@ -44,7 +44,7 @@
                             ng-class="{'is-invalid':(regForm.$submitted || regForm.email.$touched) && !regForm.email.$valid}"
                             id="regEmail"
                             required="required" />
-                    <div class="invalid-feedback">Please enter your email address.</div>
+                    <div class="invalid-feedback">Please enter your email address</div>
                 </div>
                 <div class="form-group">
                     <label for="regPassword">Password</label>
@@ -57,10 +57,10 @@
                             ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_\-+=.,?<>])(?=.*[0-9])[a-zA-Z0-9.*[!@#$%^&*()_\-+=.,?<>]{7,}$/"
                             id="regPassword"
                             required="required" />
+                    <div class="invalid-feedback">Please enter a valid password</div>
                     <small id="regPasswordHelpBlock" class="form-text text-muted">
                         Your password must be at least 7 characters in length. It must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and one of the following special characters !@#$%^&*()_-+=.,?<>
                     </small>
-                    <div class="invalid-feedback">Please enter a valid password.</div>
                 </div>
                 <div class="form-group">
                     <label for="regConfirm">Confirm Password</label>
@@ -74,7 +74,7 @@
                             ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
                             id="regConfirm"
                             required="required" />
-                    <div class="invalid-feedback">Must match password.</div>
+                    <div class="invalid-feedback">Must match password</div>
                 </div>
                 <input type="submit" class="btn btn-outline-info btn-block my-4" value="Login" />
             </form>
