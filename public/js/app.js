@@ -66,12 +66,19 @@ app.controller('SplitItController', ['$http', function($http) {
             this.user = response.data.user;
             this.loginUsername = '';
             this.loginPassword = '';
-            this.changeInclude('users');
             this.pageError = null;
+            this.loadAuthedApp();
         }).catch((err) => {
             console.log(err);
             this.pageError = 'Invalid Credentials';
         });
+    };
+
+    this.loadAuthedApp = () => {
+        this.getUser();
+        this.getHouse();
+        this.getBills();
+        this.changeInclude('users');
     };
 
     this.logOut = () => {
@@ -304,10 +311,6 @@ app.controller('SplitItController', ['$http', function($http) {
         }).then((response) => {
             console.log(response);
             this.user = response.data.user;
-            this.getUser();
-            this.getHouse();
-            this.getBills();
-            this.changeInclude('users');
         }).catch((err) => {
             console.log(err);
         });
