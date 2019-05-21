@@ -1,65 +1,110 @@
-<div class="container">
-<h1>Landing Page</h1>
-<h2>Welcome {{ctrl.user.name}}!</h2>
-<button type="button" ng-if="ctrl.user" ng-click="ctrl.logOut();">Log Out</button>
-<button type="button" ng-click="ctrl.loadHouse()">View House</button>
-<button type="button" ng-click="ctrl.loadBillsPage();">View Bills</button>
-<button type="button" ng-if="ctrl.user" ng-click="ctrl.loadManageAccount();">Manage Account</button>
 
-<div class="container" ng-if="!ctrl.house">
+<nav class="navbar  navbar-light bg-light p-4">
+  <li class="navbar-brand"><img src="https://i.imgur.com/hfYvjBc.png"></li>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav">
+      <li>
+        <a ng-click="ctrl.loadManageAccount();">Magange Account</a>
+      </li>
+      <li>
+        <a ng-if="ctrl.user" ng-click="ctrl.logOut();">Log Out</a>
+      </li>
+      <li>
+        <a>About SplitIT</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <header>
+    
+<div class="houseName" ng-if="ctrl.house">
+    <ul> Current House:
+        <li><p>{{ ctrl.house.name }}</p></li>
+        <form ng-if="ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse(house)">
+            <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
+            <button type="submit">Submit Edit</button>
+
+        </form>
+        <a ng-if="!ctrl.indexOfEditFormToShow"
+        href="#"
+        ng-click="ctrl.indexOfEditFormToShow = true">Edit
+          <i class="fas fa-edit"></i>
+        </a>
+        <a ng-click="ctrl.deleteHouse(house)">Delete
+         <i class="fas fa-trash"></i>
+        </a>
+        
+      </ul>
+    </div>
+
+
+  </header>
+<h2>Welcome, {{ctrl.user.name}}!</h2>
+<div class="createHouse" ng-if="!ctrl.house">
     <h1 >Create House</h1>
     <form ng-submit="ctrl.createHouse();">
         <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
         <input type="submit" name="Create House">
     </form>
 </div>
-<div class="container" ng-if="ctrl.house">
-    <h1>House</h1>
-    <div class="">
-        <h3>{{ ctrl.house.name }}</h3>
-        <form ng-if="ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse(house)">
-            <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
-            <button type="submit"><i class="fas fa-edit"></i></button>
 
-        </form>
-        <a ng-if="!ctrl.indexOfEditFormToShow"
-        href="#"
-        ng-click="ctrl.indexOfEditFormToShow = true">
-          Edit House
-        </a>
-        <button ng-click="ctrl.deleteHouse(house)">
-         <i class="fas fa-trash"></i>
-        </button>
-
-    </div>
-
-    <h3>Add Member</h3>
-    <form>
+<div class="memberAdd">
+    <ul> <button class="addBtn" ng-click="showAdd = !showAdd"> 
+      Add Member</button>
+<div ng-show="showAdd" >
+  <form>
+    <input ng-model="searchBox" class="user-search" type="text" placeholder="Search Members"> 
       <i class="fas fa-search" aria-hidden="true"></i>
-      <input ng-model="searchBox" class="user-search" type="text" placeholder="Search Users">
       <li ng-repeat="user in ctrl.allUsers | filter:searchBox">
-        {{ user.name }}
-         <button ng-click="ctrl.moveMember(user._id)">
-             <i class="fas fa-plus"></i> </button>
-
+        <i class="fas fa-user"></i> {{ user.name }}
+         <a ng-click="ctrl.moveMember(user._id)">
+          <i class="fas fa-plus"></i></a>
       </li>
     </form>
-
-    <h3>Current Members</h3>
-
-      <ul>
-      <li ng-repeat="member in ctrl.house.member">
-        {{ member.name }}
-          <button ng-click="ctrl.deleteMember(member._id)">
-             <i class="fas fa-trash"></i> </button>
-      </ul>
+  </div>
+</ul>
 </div>
-<div class="houseBills">
+ <div class="memberShow">
+  <ul>
+    <h3>House Members</h3>
+      <li ng-repeat="member in ctrl.house.member">
+        <h5><i class="fas fa-user"></i> {{ member.name }}
+          <a ng-click="ctrl.deleteMember(member._id)">
+             <i class="fas fa-trash"></i></a>
+           </li>
+         </h5>
+      </ul>
+    </div>
+</div>
+<div class="billAdd">
+ <ul><button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button>
+<div ng-show="showAddBill" >
+    <form ng-submit="ctrl.createBill();">
+     <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle"></li>
+       <input type="number" placeholder="Bill Total" ng-model="ctrl.newBillTotal">
+        <input type="date" id="start"
+        value="2019-05-18"
+        min="2019-01-01"
+        max="2019-12-31"
+        ng-model="ctrl.newBillDueDate"></li>
+       <input type="submit" value="Add Bill"></li>
+    </form>
+  </ul>
+  </div>
+  </div>
+  <div class="houseBills">
     <ul>
+      <h3>House Bills</h3>
         <li ng-repeat="bill in ctrl.bills">
             <div class="bill-info">
-                <h3>{{ bill.title | uppercase}}</h3>
-                <h3>Amount Due: {{ bill.total | currency}}</h3>
+                <h5>{{ bill.title | uppercase}}</h5>
+                <h5>Amount Due: {{ bill.total | currency}}</h5>
                 <h5>Due By: {{ bill.dueDate | date: 'MM/dd/yyyy'}}</h5>
             </div>
             <div class="menu-buttons">
@@ -79,7 +124,7 @@
                     <button type="button" ng-if="$index === ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = null">CANCEL</button>
                 </form>
             </div>
-            <div ng-repeat="member in ctrl.house.allMembers">
+            <div class="hasPaid" ng-repeat="member in ctrl.house.allMembers">
                 <ul>
                     <li> {{ member.name }}
                         <span ng-if="!bill.hasPaid.includes(member._id.toString())">UNPAID</span>
@@ -89,15 +134,5 @@
             </div>
         </li>
     </ul>
-    <form ng-submit="ctrl.createBill();">
-        <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle">
-        <input type="number" placeholder="Bill Total" ng-model="ctrl.newBillTotal">
-        <input type="date" id="start"
-        value="2019-05-18"
-        min="2019-01-01"
-        max="2019-12-31"
-        ng-model="ctrl.newBillDueDate">
-        <input type="submit" value="Add Bill">
-    </form>
 </div>
 </div>

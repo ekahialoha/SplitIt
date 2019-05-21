@@ -143,7 +143,6 @@ app.controller('SplitItController', ['$http', function($http) {
         }). then((response)=>{
             console.log(response);
             this.getHouse()
-            this.changeInclude('house');
         }).catch((err)=> {
             console.log(err);
         });
@@ -330,3 +329,12 @@ app.controller('SplitItController', ['$http', function($http) {
     };
     this.init();
 }]);
+
+
+
+
+
+
+
+
+
