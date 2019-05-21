@@ -83,7 +83,7 @@
       <h3>House Bills</h3>
         <li ng-repeat="bill in ctrl.bills">
             <div class="bill-info">
-                <h5>{{ bill.title | uppercase}}</h5>
+                <h4 class="billTitle">{{ bill.title | uppercase}}</h4>
                 <h5>Amount Due: {{ bill.total | currency}}</h5>
                 <h5>Due By: {{ bill.dueDate | date: 'MM/dd/yyyy'}}</h5>
             </div>
@@ -92,7 +92,7 @@
                 <button type="button" ng-model="ctrl.hasPaid" ng-disabled="bill.hasPaid.includes(ctrl.user._id.toString())" ng-click="ctrl.payBill(bill._id)">PAID</button>
                 <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
             </div>
-            <div class="container">
+            <div>
                 <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateBill(bill)">
                     <input type="text" placeholder="Bill Title" ng-model="ctrl.updatedTitle">
                     <input type="number" placeholder="Bill Total" ng-model="ctrl.updatedTotal">
