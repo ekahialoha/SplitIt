@@ -65,10 +65,10 @@ app.controller('SplitItController', ['$http', function($http) {
         }).then((response) => {
             console.log(response);
             this.user = response.data.user;
+            this.loadAuthedApp();
             this.loginUsername = '';
             this.loginPassword = '';
             this.pageError = null;
-            this.loadAuthedApp();
         }).catch((err) => {
             console.log(err);
             this.pageError = 'Invalid Credentials';
@@ -124,7 +124,6 @@ app.controller('SplitItController', ['$http', function($http) {
 
     };
 
-
     this.loadManageAccount = () => {
         this.update = {
             name: this.user.name,
@@ -133,7 +132,7 @@ app.controller('SplitItController', ['$http', function($http) {
         this.changeInclude('manage-account');
     };
 
-     this.createHouse = () => {
+    this.createHouse = () => {
         $http({
             method: 'POST',
             url: '/house',
@@ -193,7 +192,6 @@ app.controller('SplitItController', ['$http', function($http) {
         });
     };
 
-
     this.moveMember = (user)=>{
         console.log(this.house)
         $http({
@@ -224,13 +222,11 @@ app.controller('SplitItController', ['$http', function($http) {
         });
     };
 
-
     this.loadHouse = () => {
         this.getUser()
         this.getHouse();
         this.changeInclude('house');
     }
-
 
     this.getBills = () => {
         $http({
@@ -316,7 +312,7 @@ app.controller('SplitItController', ['$http', function($http) {
         })
     }
 
-    this.init = () => {
+    this.verifyAuth = () => {
         $http({
             method: 'GET',
             url: '/users/validate-auth'
@@ -328,5 +324,5 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         });
     };
-    this.init();
+    this.verifyAuth();
 }]);
