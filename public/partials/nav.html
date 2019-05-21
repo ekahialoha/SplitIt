@@ -1,0 +1,20 @@
+<nav class="navbar  navbar-light bg-light p-4">
+  <li class="navbar-brand"><a href="#" ng-click="ctrl.loadAuthedApp()"><img src="https://i.imgur.com/hfYvjBc.png"></a></li>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav">
+      <li>
+        <a ng-click="ctrl.loadManageAccount();">Magange Account</a>
+      </li>
+      <li>
+        <a ng-if="ctrl.user" ng-click="ctrl.logOut();">Log Out</a>
+      </li>
+      <li>
+        <a>About SplitIT</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
