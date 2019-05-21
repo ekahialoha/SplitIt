@@ -7,8 +7,8 @@ const House = require('../models/house.js');
 const checkAuth = require('../middleware/checkauth.js');
 
 //-- INDEX ROUTE --//
-bills.get('/', (req, res) => {
-	Bills.find({}, (err, foundBill)=> {
+bills.get('/:id', (req, res) => {
+	Bills.find({house: req.params.id}, (err, foundBill)=> {
 		res.json(foundBill);
 	});
 });

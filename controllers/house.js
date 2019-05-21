@@ -10,7 +10,7 @@ houses.get('/', (req, res) => {
 	House.findOne({ $or: [
 		{owner: req.session.user._id},
 		{member: {$in: [req.session.user._id]}}
-	]}).populate('member').exec((err, foundHouse)=> {
+	]}).populate('member').populate('owner').exec((err, foundHouse)=> {
 		res.json(foundHouse)
 	});
 });

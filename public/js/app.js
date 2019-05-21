@@ -16,7 +16,7 @@ app.directive('myConfirmPass', function() {
 
 app.controller('SplitItController', ['$http', function($http) {
     this.bills = [];
-    this.house = '';
+    this.house = {};
     this.user = null;
     this.pageError = null;
     this.update = {};
@@ -150,6 +150,9 @@ app.controller('SplitItController', ['$http', function($http) {
         }). then((response)=>{
             console.log(response);
             this.house = response.data;
+            this.house.allMembers = this.house.member;
+            this.house.allMembers.unshift(this.house.owner);
+            console.log(this.house.allMembers);
         }).catch((err)=> {
             console.log(err);
         });
@@ -159,7 +162,7 @@ app.controller('SplitItController', ['$http', function($http) {
     this.editHouse = (house)=>{
         $http({
             method:'PUT',
-            url:'/house/' + house._id,
+            url:'/house/' + this.house._id,
             data: {
             name: this.updatedHouseName
             }
@@ -175,7 +178,7 @@ app.controller('SplitItController', ['$http', function($http) {
     this.deleteHouse = (house)=>{
         $http({
             method:'DELETE',
-            url:'/house/' + house._id
+            url:'/house/' + this.house._id
         }).then((response)=>{
             this.getHouse()
             console.log(response);
@@ -183,7 +186,7 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         });
     };
-    
+
 
     this.moveMember = (user)=>{
         console.log(this.house)
@@ -194,7 +197,7 @@ app.controller('SplitItController', ['$http', function($http) {
             member: user
             }
         }).then((response)=>{
-            this.house = response.data 
+            this.house = response.data
             console.log(response);
         }).catch((err)=> {
             console.log(err);
@@ -213,7 +216,7 @@ app.controller('SplitItController', ['$http', function($http) {
             console.log(err);
         });
     };
-    
+
 
     this.loadHouse = () => {
         this.getUser()
@@ -225,7 +228,7 @@ app.controller('SplitItController', ['$http', function($http) {
     this.getBills = () => {
         $http({
             method: 'GET',
-            url: '/bills'
+            url: '/bills/' + this.house._id
         }).then((response) => {
             console.log(response);
             this.bills = response.data;
@@ -248,7 +251,7 @@ app.controller('SplitItController', ['$http', function($http) {
                 title: this.newBillTitle,
                 total: this.newBillTotal,
                 dueDate: this.newBillDueDate,
-                members: this.newBillUsers
+                house: this.house._id
             }
         }).then((response) => {
             console.log(response);
@@ -301,6 +304,9 @@ app.controller('SplitItController', ['$http', function($http) {
         }).then((response) => {
             console.log(response);
             this.user = response.data.user;
+            this.getUser();
+            this.getHouse();
+            this.getBills();
             this.changeInclude('users');
         }).catch((err) => {
             console.log(err);
