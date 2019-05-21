@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="card mt-5 shadow rounded-lg">
+    <div class="card mt-5 shadow manage">
         <h3 class="card-header text-uppercase">Registration</h3>
         <main class="card-body">
             <div ng-if="ctrl.pageError" class="alert alert-danger">
@@ -76,7 +76,7 @@
                             required="required" />
                     <div class="invalid-feedback">Must match password</div>
                 </div>
-                <input type="submit" class="btn btn-outline-info btn-block my-4" value="Login" />
+                <input type="submit" class="btn btn-outline-info btn-block my-4" value="Complete Registration" />
             </form>
             <p class="text-center">Already a member? <span class="pointer" ng-click="ctrl.changeInclude('auth')">Login</span></p>
         </main>
