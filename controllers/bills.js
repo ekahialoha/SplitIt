@@ -29,6 +29,16 @@ bills.put('/:id', (req, res)=> {
 	});
 });
 
+//-- PAID BILL ROUTE --//
+bills.patch('/:id', (req, res) => {
+	Bills.findById(req.params.id, (err, paidBill) => {
+		paidBill.hasPaid.push(req.session.user._id);
+		paidBill.save((err, updatedBill) => {
+			res.json(updatedBill);
+		});
+	});
+});
+
 //-- DELETE BILL ROUTE --//
 bills.delete('/:id', (req, res)=>{
 	Bills.findByIdAndRemove(req.params.id, (err, deletedBill) => {

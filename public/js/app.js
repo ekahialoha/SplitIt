@@ -77,7 +77,6 @@ app.controller('SplitItController', ['$http', function($http) {
     this.loadAuthedApp = () => {
         this.getUser();
         this.getHouse();
-        this.getBills();
         this.changeInclude('users');
     };
 
@@ -159,7 +158,7 @@ app.controller('SplitItController', ['$http', function($http) {
             this.house = response.data;
             this.house.allMembers = this.house.member;
             this.house.allMembers.unshift(this.house.owner);
-            console.log(this.house.allMembers);
+            this.getBills();
         }).catch((err)=> {
             console.log(err);
         });
@@ -175,7 +174,7 @@ app.controller('SplitItController', ['$http', function($http) {
             }
         }).then((response)=>{
             this.getHouse()
-            controller.indexOfEditFormToShow = null;
+            this.indexOfEditFormToShow = null;
             console.log(response);
         }).catch((err)=> {
             console.log(err);
@@ -204,8 +203,8 @@ app.controller('SplitItController', ['$http', function($http) {
             member: user
             }
         }).then((response)=>{
-            this.house = response.data
-            console.log(response);
+            //this.house = response.data
+            this.loadAuthedApp();
         }).catch((err)=> {
             console.log(err);
         });
@@ -219,6 +218,7 @@ app.controller('SplitItController', ['$http', function($http) {
             url: '/house/'+ this.house._id +'/member/' + user
         }).then((response)=>{
             console.log(response);
+            this.loadAuthedApp();
         }).catch((err)=> {
             console.log(err);
         });
@@ -248,6 +248,17 @@ app.controller('SplitItController', ['$http', function($http) {
         this.getBills();
         this.getHouse();
         this.changeInclude('bills');
+    }
+
+    this.payBill = (id) => {
+        $http({
+            method: 'PATCH',
+            url: '/bills/' + id
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        })
     }
 
     this.createBill = () => {
@@ -311,6 +322,7 @@ app.controller('SplitItController', ['$http', function($http) {
         }).then((response) => {
             console.log(response);
             this.user = response.data.user;
+            this.loadAuthedApp();
         }).catch((err) => {
             console.log(err);
         });

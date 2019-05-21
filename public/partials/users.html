@@ -17,14 +17,14 @@
     <h1>House</h1>
     <div class="">
         <h3>{{ ctrl.house.name }}</h3>
-        <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse(house)">
+        <form ng-if="ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse(house)">
             <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
             <button type="submit"><i class="fas fa-edit"></i></button>
-            
+
         </form>
-        <a ng-if="$index !== ctrl.indexOfEditFormToShow"
+        <a ng-if="!ctrl.indexOfEditFormToShow"
         href="#"
-        ng-click="ctrl.indexOfEditFormToShow = $index">
+        ng-click="ctrl.indexOfEditFormToShow = true">
           Edit House
         </a>
         <button ng-click="ctrl.deleteHouse(house)">
@@ -64,21 +64,27 @@
             </div>
             <div class="menu-buttons">
                 <button type="button" ng-if="$index !== ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = $index">EDIT</button>
-                <button type="button" ng-model="ctrl.hasPaid">PAID</button>
+                <button type="button" ng-model="ctrl.hasPaid" ng-if="!bill.hasPaid.includes(member._id.toString())" ng-click="ctrl.payBill(bill._id)">PAID</button>
                 <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
             </div>
             <div class="container">
                 <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateBill(bill)">
                     <input type="text" placeholder="Bill Title" ng-model="ctrl.updatedTitle">
                     <input type="number" placeholder="Bill Total" ng-model="ctrl.updatedTotal">
-                    <input type="date" placeholder="Bill Due Date" ng-model="ctrl.updatedDueDate">
+                    <input type="date" placeholder="Bill Due Date" ng-model="ctrl.updatedDueDate"
+                    value="2019-05-18"
+                    min="2019-01-01"
+                    max="2019-12-31">
                     <input type="submit" value="UPDATE">
                     <button type="button" ng-if="$index === ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = null">CANCEL</button>
                 </form>
             </div>
             <div ng-repeat="member in ctrl.house.allMembers">
                 <ul>
-                    <li> {{ member.name }} </li>
+                    <li> {{ member.name }}
+                        <span ng-if="!bill.hasPaid.includes(member._id.toString())">UNPAID</span>
+                        <span ng-if="bill.hasPaid.includes(member._id.toString())">PAID</span>
+                    </li>
                 </ul>
             </div>
         </li>
