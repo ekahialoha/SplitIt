@@ -1,33 +1,83 @@
-<div ng-include="'./partials/nav.html'"></div> 
+<div ng-include="'./partials/nav.html'"></div>
 <div class="container">
 <div class="manage">
 <h1>Manage Account</h1>
 <div ng-if="ctrl.pageError" class="alert alert-danger">
     Current Password Incorrect.
 </div>
-<form ng-submit="ctrl.updateUser();" name="updateForm" novalidate="novalidate">
-    username: <input type="text" name="name" placeholder="Name" ng-model="ctrl.update.name" required="required" /></br>
-    <p ng-if="updateForm.name.$touched && !updateForm.name.$valid">You name is required.</p>
-    email: <input type="email" name="email" placeholder="Email" ng-model="ctrl.update.email" required="required" /> </br>
-    <p ng-if="updateForm.email.$touched && !updateForm.email.$valid">A valid email address is required.</p>
-    password: <input type="password"
-            name="password"
-            placeholder="Password"
-            ng-model="ctrl.update.password"
-            ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_\-+=.,?<>])(?=.*[0-9]).{7,}/"
-            ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
-             /></br>
-    <p ng-if="updateForm.password.$touched && !updateForm.password.$valid">Password must be at least 7 characters in length and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 symbol (!@#$%^&*()_-+=.,?<>).</p>
-    confirm password: <input type="password"
-            placeholder="Confirm Password"
-            ng-model="ctrl.confirmPassword"
-            name="confirm"
-            my-confirm-pass="ctrl.update.password"
-            ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
-             /></br>
-    <p ng-if="updateForm.confirm.$error.confirm">Password confirmation must match Password</p>
-    current password: <input type="password" placeholder="Current Password" ng-model="ctrl.update.currentPassword" required="required" /></br>
-    <input type="submit" value="Update Account" ng-disabled="!updateForm.$valid" /> 
+<form ng-submit="updateForm.$valid &&ctrl.updateUser();" name="updateForm" novalidate="novalidate">
+    <div class="form-group">
+        <label for="updateName">Username</label>
+        <input type="text"
+                class="form-control"
+                name="name"
+                placeholder="Name"
+                ng-model="ctrl.update.name"
+                ng-class="{'is-invalid':(updateForm.$submitted || updateForm.name.$touched) && !updateForm.name.$valid}"
+                id="updateName"
+                required="required" />
+        <div class="invalid-feedback">
+            Your name is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="updateEmail">Email</label>
+        <input type="email"
+                class="form-control"
+                name="email"
+                placeholder="Email"
+                ng-model="ctrl.update.email"
+                ng-class="{'is-invalid':(updateForm.$submitted || updateForm.email.$touched) && !updateForm.email.$valid}"
+                required="required" />
+        <div class="invalid-feedback">A valid email address is required.</div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <label for="updatePassword">New Password</label>
+            <input type="password"
+                    class="form-control"
+                    name="password"
+                    placeholder="Password"
+                    ng-model="ctrl.update.password"
+                    ng-class="{'is-invalid':(updateForm.$submitted || updateForm.password.$touched) && !updateForm.password.$valid}"
+                    ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_\-+=.,?<>])(?=.*[0-9]).{7,}/"
+                    ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
+                    id="updatePassword"
+                     />
+            <small id="updatePasswordHelpBlock" class="form-text text-muted">
+                OPTIONAL, only if you wish to change password.
+                Your password must be at least 7 characters in length. It must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and one of the following special characters !@#$%^&*()_-+=.,?<>
+            </small>
+            <div class="invalid-feedback">Please enter a valid password.</div>
+        </div>
+        <div class="col">
+            <label for="updateConfirm">Confirm New Password</label>
+            <input type="password"
+                    class="form-control"
+                    placeholder="Confirm Password"
+                    ng-model="ctrl.confirmPassword"
+                    name="confirm"
+                    ng-class="{'is-invalid':updateForm.confirm.$error.confirm}"
+                    my-confirm-pass="ctrl.update.password"
+                    ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
+                    id="updateConfirm" />
+            <small id="updatePasswordHelpBlock" class="form-text text-muted">
+                OPTIONAL, only if you wish to change password.
+            </small>
+            <div class="invalid-feedback">Password confirmation must match Password</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="">Enter Current Password to Continue</label>
+        <input type="password"
+                name="currentPassword"
+                class="form-control"
+                placeholder="Current Password"
+                ng-class="{'is-invalid':(updateForm.$submitted || updateForm.currentPassword.$touched) && !updateForm.currentPassword.$valid}"
+                ng-model="ctrl.update.currentPassword" required="required" />
+        <div class="invalid-feedback">Please enter your current password</div>
+    </div>
+    <input type="submit" value="Update Account" />
 </form>
 </div>
 </div>
