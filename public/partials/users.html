@@ -7,11 +7,11 @@
 <p>Welcome, {{ctrl.user.name}}!</p>
 </header>
 <div class="createHouse" ng-if="!ctrl.house">
-    <h1 >Create House</h1>
+    <ul><h1 >Create House</h1>
     <form ng-submit="ctrl.createHouse();">
         <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
         <input type="submit" name="Create House">
-    </form>
+    </form></ul>
 </div>  
 <div class="houseName" ng-if="ctrl.house">
     <ul> <h3>Current House:</h3>
@@ -64,7 +64,7 @@
       </ul>
     </div>
 <div class="billAdd">
- <ul><button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button></ul>
+ <ul><button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button>
 <div ng-show="showAddBill" >
     <form ng-submit="ctrl.createBill();">
      <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle">
@@ -75,7 +75,7 @@
         max="2019-12-31"
         ng-model="ctrl.newBillDueDate">
        <input type="submit" value="Add Bill">
-    </form>
+    </form></ul>
   </div>
   </div>
   <div class="houseBills">
