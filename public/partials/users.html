@@ -53,7 +53,7 @@
         <input type="submit" name="Create House">
     </form>
 </div>
-
+<div ng-if="ctrl.house">
 <div class="memberAdd">
     <ul> <button class="addBtn" ng-click="showAdd = !showAdd">
       Add Member</button>
@@ -81,7 +81,6 @@
         </li>
       </ul>
     </div>
-</div>
 <div class="billAdd">
  <button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button>
 <div ng-show="showAddBill" >
@@ -133,5 +132,6 @@
             </div>
         </li>
     </ul>
+</div>
 </div>
 </div>

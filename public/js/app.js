@@ -38,14 +38,15 @@ app.controller('SplitItController', ['$http', function($http) {
             }
         }).then((response) => {
             console.log(response);
+
+            // Log user in
+            this.user = response.data.user;
+            this.loadAuthedApp();
             this.createName = '';
             this.createUsername = '';
             this.createEmail = '';
             this.createPassword = '';
-
-            // Log user in
-            this.user = response.data.user;
-            this.changeInclude('users');
+            this.confirmPassword = '';
             this.pageError = null;
         }).catch((err) => {
             console.log(err);
@@ -329,12 +330,3 @@ app.controller('SplitItController', ['$http', function($http) {
     };
     this.init();
 }]);
-
-
-
-
-
-
-
-
-
