@@ -255,6 +255,7 @@ app.controller('SplitItController', ['$http', function($http) {
             method: 'PATCH',
             url: '/bills/' + id
         }).then((response) => {
+             this.loadAuthedApp();
             console.log(response);
         }).catch((error) => {
             console.log(error);
