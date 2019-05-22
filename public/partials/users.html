@@ -1,0 +1,120 @@
+
+<div ng-include="'./partials/nav.html'"></div>
+
+<div class="container">
+
+<header class="welcome">
+<p>Welcome, {{ctrl.user.name}}!</p>
+</header>
+<div class="createHouse" ng-if="!ctrl.house">
+    <ul><h1 >Create House</h1>
+    <form ng-submit="ctrl.createHouse();">
+        <input type="text" placeholder="House Name" ng-model="ctrl.houseName"/>
+        <input type="submit" name="Create House">
+    </form></ul>
+</div>
+<div class="houseName" ng-if="ctrl.house">
+    <ul> <h3>Current House:</h3>
+        <li><h5>{{ ctrl.house.name }}</h5></li>
+        <span ng-if="ctrl.user._id.toString() === ctrl.house.owner._id.toString()">
+        <form ng-if="ctrl.indexOfEditFormToShow" ng-submit="ctrl.editHouse()">
+            <input ng-model="ctrl.updatedHouseName" type="text" placeholder="House Name"/>
+            <button type="submit">Submit Edit</button>
+
+        </form>
+        <div class="editIcons">
+        <a ng-if="!ctrl.indexOfEditFormToShow"
+        ng-click="ctrl.indexOfEditFormToShow = true">Edit
+          <i class="fas fa-edit"></i>
+        </a>
+        <a ng-click="ctrl.deleteHouse()">Delete
+         <i class="fas fa-trash"></i>
+        </a>
+        </div>
+        </span>
+      </ul>
+    </div>
+
+<div ng-if="ctrl.house">
+<div class="memberAdd">
+    <ul> <button class="addBtn" ng-click="showAdd = !showAdd">
+      Add Member</button>
+<div ng-show="showAdd" >
+  <form>
+    <input ng-model="searchBox" class="user-search" type="text" placeholder="Search Members">
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <li ng-repeat="user in ctrl.allUsers | filter:searchBox">
+        <i class="fas fa-user"></i> {{ user.name }}
+         <a ng-click="ctrl.moveMember(user._id)">
+          <i class="fas fa-plus"></i></a>
+      </li>
+    </form>
+  </div>
+</ul>
+</div>
+ <div class="memberShow">
+  <ul>
+    <h3>House Members</h3>
+      <li ng-repeat="member in ctrl.house.member">
+        <h5><i class="fas fa-user"></i> {{ member.name }}
+          <a ng-click="ctrl.deleteMember(member._id)">
+             <i class="fas fa-trash"></i></a>
+         </h5>
+        </li>
+      </ul>
+    </div>
+<div class="billAdd">
+ <ul><button class="addBtn" ng-click="showAddBill = !showAddBill"> Add New Bill</button>
+<div ng-show="showAddBill" >
+    <form ng-submit="ctrl.createBill();">
+     <input type="text" placeholder="Bill Title" ng-model="ctrl.newBillTitle">
+       <input type="number" placeholder="Bill Total" ng-model="ctrl.newBillTotal">
+        <input type="date" id="start"
+        value="2019-05-18"
+        min="2019-01-01"
+        max="2019-12-31"
+        ng-model="ctrl.newBillDueDate">
+       <input type="submit" value="Add Bill">
+    </form></ul>
+  </div>
+  </div>
+  <div class="houseBills" ng-if="ctrl.house">
+    <ul>
+      <h3>House Bills</h3>
+        <li ng-repeat="bill in ctrl.bills">
+            <div class="bill-info">
+                <h4 class="billTitle">{{ bill.title | uppercase}}</h4>
+                <h5>Amount Due: {{ bill.total | currency}}</h5>
+                <h5>Due By: {{ bill.dueDate | date: 'MM/dd/yyyy'}}</h5>
+            </div>
+            <div class="menu-buttons">
+                <button type="button" ng-if="$index !== ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = $index">EDIT</button>
+                <button type="button" ng-model="ctrl.hasPaid" ng-disabled="bill.hasPaid.includes(ctrl.user._id.toString())" ng-click="ctrl.payBill(bill._id)">PAID</button>
+                <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
+            </div>
+            <div>
+                <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateBill(bill._id)">
+                    <input type="text" placeholder="Bill Title" ng-model="ctrl.updatedTitle">
+                    <input type="number" placeholder="Bill Total" ng-model="ctrl.updatedTotal">
+                    <input type="date" placeholder="Bill Due Date" ng-model="ctrl.updatedDueDate"
+                    value="2019-05-18"
+                    min="2019-01-01"
+                    max="2019-12-31">
+                    <input type="submit" value="UPDATE">
+                    <button type="button" ng-if="$index === ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = null">CANCEL</button>
+                </form>
+            </div>
+            <div class="hasPaid" ng-repeat="member in ctrl.house.allMembers">
+                <ul>
+                    <li> {{ member.name }}
+                        <span ng-if="!bill.hasPaid.includes(member._id.toString())" class="text-danger font-weight-bold">UNPAID</span>
+                        <span ng-if="bill.hasPaid.includes(member._id.toString())" class="text-success">PAID</span>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+</div>
+</div>
+<nav ng-include="'./partials/footer.html'"></nav>

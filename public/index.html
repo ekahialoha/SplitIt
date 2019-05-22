@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="SplitIt">
+    <head>
+        <meta charset="utf-8">
+        <title>SplitIt</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
+        <script src="/js/app.js" charset="utf-8"></script>
+        <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+        <style media="screen">
+            .pointer {
+                cursor: pointer;
+            }
+
+            body{
+                font-family: 'Oswald', sans-serif;
+                color: rgb(150,85,30);
+                background-image: url(https://i.imgur.com/Vq9DT3p.jpg?1);
+                background-size: cover;
+                background-position: center;
+                height: 100%;
+                width: 100%;
+                background-repeat: no-repeat;
+                margin-bottom: 50%;
+                padding-bottom: 0;
+            }
+
+            li {
+                list-style-type: none;
+                color: black;
+            }
+            a{
+                cursor: pointer;
+                color: black;
+            }
+            a.nav-link, label{
+            color: black;
+            }
+            .header{
+                height: 50%;
+                width: 120px;
+                margin-bottom:  -20px;
+            }
+
+            nav{
+
+            margin-bottom: -25px;
+            margin-top: -15px;
+            padding-bottom: 0px;
+           }
+           .container{
+
+            padding-top: 25px;
+            margin-bottom: 25%;
+           }
+           .addBtn{
+            background-color: white;
+
+
+           }
+           button{
+            border-radius: 5px;
+            background-color: white;
+
+           }
+           input{
+            color: grey;
+            border: 1px solid grey;
+            margin-top: 7px;
+           }
+
+
+           .memberShow, .houseBills{
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255,255,250,.5);
+            border-radius: 7px;
+            }
+            .houseBills{
+                width: 90%;
+                margin: auto;
+
+            }
+            .billTitle{
+                padding-top: 15px;
+            }
+
+            .manage{
+            background-color: rgba(255,255,255,.5);
+            border-radius: 7px;
+            padding: 25px;
+            margin-top:25px;
+            color: black;
+         }
+         .memberAdd, .billAdd{
+             display: flex;
+            justify-content: center;
+            padding-top: 15px;
+         }
+          .houseName, .createHouse{
+             display: flex;
+            justify-content: center;
+            margin-top:15px;
+         }
+         .welcome{
+            display: flex;
+            justify-content: flex-start;
+            margin-left: -5%;
+            padding-top: 10px;
+
+         }
+         h2, p, .card-header, h5{
+            text-align: center;
+            color: black;
+        }
+         h2{
+            padding-bottom: 10px;
+         }
+         .hasPaid{
+            
+            margin-right: 20%;
+            
+
+
+         }
+         .auth{
+            margin-bottom: 60%;
+         }
+         footer{
+            margin-bottom: -50%;
+            background: rgba(255,255,250,.5);
+            font-size: 14px;
+            font-weight: 500;
+            padding-top: 1px;
+            
+        }
+        
+         img{
+            width: 50%;
+            height: 50px;
+         }
+         .editIcons{
+            text-align: center;
+         }
+
+        @media only screen and (max-width: 576px) {
+        .container{
+            margin-bottom: 30%;
+        }
+        .welcome{
+            display: flex;
+            justify-content: flex-start;
+            margin-left: 5px;
+            padding-top: 10px;
+        }
+       .auth{
+            margin-bottom: 80%;
+         }
+    }
+
+
+        </style>
+    </head>
+    <body ng-controller="SplitItController as ctrl">
+        <ng-include src="ctrl.includePath"></ng-include>
+    </body>
+</html>

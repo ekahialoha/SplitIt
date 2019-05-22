@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="card mt-5 shadow manage">
+        <h3 class="card-header text-uppercase">Registration</h3>
+        <main class="card-body">
+            <div ng-if="ctrl.pageError" class="alert alert-danger">
+                Username Taken
+            </div>
+            <form ng-submit="regForm.$valid && ctrl.signUp();" name="regForm" novalidate="novalidate">
+                <div class="form-group">
+                    <label for="regName">Name</label>
+                    <input type="text"
+                            class="form-control"
+                            name="name"
+                            placeholder="Name"
+                            ng-model="ctrl.createName"
+                            ng-class="{'is-invalid':(regForm.$submitted || regForm.name.$touched) && !regForm.name.$valid}"
+                            id="regName"
+                            required="required" />
+                    <div class="invalid-feedback">Please enter your name</div>
+                </div>
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text"
+                            class="form-control"
+                            name="username"
+                            placeholder="Username"
+                            ng-model="ctrl.createUsername"
+                            ng-pattern="/^[a-zA-Z0-9.\-]{5,30}$/"
+                            ng-class="{'is-invalid':(regForm.$submitted || regForm.username.$touched) && !regForm.username.$valid}"
+                            id="regUsername"
+                            required="required" />
+                    <div class="invalid-feedback">Please choose a valid and unique username</div>
+                    <small id="regUsernameHelpBlock" class="form-text text-muted">
+                        Your username must be between 5-30 characters in length. It may contain letters, numbers, and the special characters .-
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email"
+                            class="form-control"
+                            name="email"
+                            placeholder="Email"
+                            ng-model="ctrl.createEmail"
+                            ng-class="{'is-invalid':(regForm.$submitted || regForm.email.$touched) && !regForm.email.$valid}"
+                            id="regEmail"
+                            required="required" />
+                    <div class="invalid-feedback">Please enter your email address</div>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password"
+                            class="form-control"
+                            name="password"
+                            placeholder="Password"
+                            ng-model="ctrl.createPassword"
+                            ng-class="{'is-invalid':(regForm.$submitted || regForm.password.$touched) && !regForm.password.$valid}"
+                            ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_\-+=.,?<>])(?=.*[0-9])[a-zA-Z0-9.*[!@#$%^&*()_\-+=.,?<>]{7,}$/"
+                            id="regPassword"
+                            required="required" />
+                    <div class="invalid-feedback">Please enter a valid password</div>
+                    <small id="regPasswordHelpBlock" class="form-text text-muted">
+                        Your password must be at least 7 characters in length. It must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and one of the following special characters !@#$%^&*()_-+=.,?<>
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="regConfirm">Confirm Password</label>
+                    <input type="password"
+                            class="form-control"
+                            name="confirm"
+                            placeholder="Confirm Password"
+                            ng-model="ctrl.confirmPassword"
+                            ng-class="{'is-invalid':regForm.confirm.$error.confirm || ((regForm.$submitted || regForm.password.$touched) && !regForm.confirm.$valid)}"
+                            my-confirm-pass="ctrl.createPassword"
+                            ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
+                            id="regConfirm"
+                            required="required" />
+                    <div class="invalid-feedback">Must match password</div>
+                </div>
+                <input type="submit" class="btn btn-outline-info btn-block my-4" value="Complete Registration" />
+            </form>
+            <p class="text-center">Already a member? <span class="pointer" ng-click="ctrl.changeInclude('auth')">Login</span></p>
+        </main>
+    </div>
+</div>
+<nav ng-include="'./partials/footer.html'"></nav>
