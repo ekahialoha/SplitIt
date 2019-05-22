@@ -283,7 +283,7 @@ app.controller('SplitItController', ['$http', function($http) {
     this.deleteBill = (billId) => {
         $http({
             method: 'DELETE',
-            url: '/bills/' + id
+            url: '/bills/' + billId
         }).then((deleteBill) => {
             console.log(deleteBill);
             const index = this.bills.findIndex(bill => {
