@@ -1,7 +1,7 @@
 {
   "name": "splitit",
   "version": "1.0.0",
-  "description": "Emmy",
+  "description": "App for household members to split bills and keep track who has paid.",
   "main": "server.js",
   "engines": {
     "node": "11.12.0"
