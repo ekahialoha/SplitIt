@@ -93,7 +93,7 @@
                 <button type="button" ng-click="ctrl.deleteBill(bill._id)">DELETE</button>
             </div>
             <div>
-                <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateBill(bill_.id)">
+                <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateBill(bill._id)">
                     <input type="text" placeholder="Bill Title" ng-model="ctrl.updatedTitle">
                     <input type="number" placeholder="Bill Total" ng-model="ctrl.updatedTotal">
                     <input type="date" placeholder="Bill Due Date" ng-model="ctrl.updatedDueDate"
